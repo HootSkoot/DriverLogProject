@@ -5,16 +5,83 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic;
 
 namespace DriverLogProject
 {
-    public partial class Form1 : Form
+    public partial class DriverDatabaseForm : Form
     {
-        public Form1()
+
+        private BindingList<string> bindinglist { get; set; }
+        public DriverDatabaseForm()
         {
             InitializeComponent();
+        }
+
+        private void DriverDatabaseForm_Load(object sender, EventArgs e)
+        {
+            bindinglist = new BindingList<string>();
+            BindingSource bSource = new BindingSource();
+            bSource.DataSource = bindinglist;
+            if (Properties.Settings.Default.VehicleList == null)
+            {
+                bindinglist[0] = "";
+            }
+            else
+            {
+                foreach (var item in Properties.Settings.Default.VehicleList)
+                {
+                    bindinglist.Add(item);
+                }
+            }
+
+            VehicleList.DataSource = bSource;
+
+            DisableTabControls();
+            
+            
+            //VehicleList.Items.AddRange(Properties.Settings.Default.VehicleList.Cast<string>().ToArray());
+        }
+
+        
+
+        private void MenuAddVehicle_Click(object sender, EventArgs e)
+        {
+            String input = Interaction.InputBox("Enter an alphanumeric name, use underscores for spaces", "Vehicle Name", default);
+
+            if (Regex.IsMatch(input, "^[a-zA-Z0-9_]*$"))
+            {
+                Properties.Settings.Default.VehicleList.Add(input);
+                Properties.Settings.Default.Save();
+                bindinglist.Add(input);
+            }
+            else
+            {
+                MessageBox.Show("Invalid Truck Name");
+            }
+        }
+
+        //Invoke this whenever the vehicle selection is changed
+        private void DisableTabControls() {
+            foreach (Control item in tabPage1.Controls)
+            {
+                if (item.Name == "activateVehicle" || item.Name == "VehicleList")
+                {
+                    item.Enabled = true;
+                }
+                else
+                {
+                    item.Enabled = false;
+                }
+            }
+        }
+
+        private void VehicleList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DisableTabControls();
         }
     }
 }
