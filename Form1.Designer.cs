@@ -34,12 +34,19 @@ namespace DriverLogProject
             this.menuAddVehicle = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage1TablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.VehicleList = new System.Windows.Forms.ComboBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.activateVehicle = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.Building = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ArriveDepart = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.OnDemand = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage1TablePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -59,7 +66,7 @@ namespace DriverLogProject
             this.actionsMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuAddVehicle});
             this.actionsMenu.Name = "actionsMenu";
-            this.actionsMenu.Size = new System.Drawing.Size(87, 30);
+            this.actionsMenu.Size = new System.Drawing.Size(87, 29);
             this.actionsMenu.Text = "Actions";
             // 
             // menuAddVehicle
@@ -82,8 +89,7 @@ namespace DriverLogProject
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.activateVehicle);
-            this.tabPage1.Controls.Add(this.VehicleList);
+            this.tabPage1.Controls.Add(this.tabPage1TablePanel);
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Size = new System.Drawing.Size(1136, 466);
@@ -91,33 +97,104 @@ namespace DriverLogProject
             this.tabPage1.Text = "Vehicle Handler";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // tabPage1TablePanel
+            // 
+            this.tabPage1TablePanel.ColumnCount = 4;
+            this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 232F));
+            this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 554F));
+            this.tabPage1TablePanel.Controls.Add(this.VehicleList, 0, 0);
+            this.tabPage1TablePanel.Controls.Add(this.activateVehicle, 1, 0);
+            this.tabPage1TablePanel.Controls.Add(this.dataGridView1, 0, 2);
+            this.tabPage1TablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabPage1TablePanel.Location = new System.Drawing.Point(0, 0);
+            this.tabPage1TablePanel.Name = "tabPage1TablePanel";
+            this.tabPage1TablePanel.RowCount = 3;
+            this.tabPage1TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tabPage1TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 11F));
+            this.tabPage1TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tabPage1TablePanel.Size = new System.Drawing.Size(1136, 466);
+            this.tabPage1TablePanel.TabIndex = 3;
+            // 
             // VehicleList
             // 
+            this.VehicleList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.VehicleList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.VehicleList.FormattingEnabled = true;
-            this.VehicleList.Location = new System.Drawing.Point(8, 11);
+            this.VehicleList.Location = new System.Drawing.Point(3, 3);
             this.VehicleList.Name = "VehicleList";
-            this.VehicleList.Size = new System.Drawing.Size(179, 28);
+            this.VehicleList.Size = new System.Drawing.Size(144, 28);
             this.VehicleList.TabIndex = 1;
             this.VehicleList.SelectedIndexChanged += new System.EventHandler(this.VehicleList_SelectedIndexChanged);
+            // 
+            // activateVehicle
+            // 
+            this.activateVehicle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.activateVehicle.Location = new System.Drawing.Point(153, 3);
+            this.activateVehicle.Name = "activateVehicle";
+            this.activateVehicle.Size = new System.Drawing.Size(194, 29);
+            this.activateVehicle.TabIndex = 2;
+            this.activateVehicle.Text = "Set Active Vechicle";
+            this.activateVehicle.UseVisualStyleBackColor = true;
+            this.activateVehicle.Click += new System.EventHandler(this.activateVehicle_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Building,
+            this.ArriveDepart,
+            this.OnDemand});
+            this.tabPage1TablePanel.SetColumnSpan(this.dataGridView1, 3);
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 49);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowHeadersWidth = 62;
+            this.dataGridView1.RowTemplate.Height = 28;
+            this.dataGridView1.Size = new System.Drawing.Size(576, 414);
+            this.dataGridView1.TabIndex = 3;
             // 
             // tabPage2
             // 
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1136, 466);
+            this.tabPage2.Size = new System.Drawing.Size(1136, 469);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // activateVehicle
+            // Building
             // 
-            this.activateVehicle.Location = new System.Drawing.Point(193, 7);
-            this.activateVehicle.Name = "activateVehicle";
-            this.activateVehicle.Size = new System.Drawing.Size(191, 35);
-            this.activateVehicle.TabIndex = 2;
-            this.activateVehicle.Text = "Set Active Vechicle";
-            this.activateVehicle.UseVisualStyleBackColor = true;
+            this.Building.HeaderText = "Building";
+            this.Building.MinimumWidth = 8;
+            this.Building.Name = "Building";
+            this.Building.Width = 150;
+            // 
+            // ArriveDepart
+            // 
+            this.ArriveDepart.HeaderText = "Arrival/Departure";
+            this.ArriveDepart.Items.AddRange(new object[] {
+            "",
+            "A",
+            "D"});
+            this.ArriveDepart.MinimumWidth = 8;
+            this.ArriveDepart.Name = "ArriveDepart";
+            this.ArriveDepart.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ArriveDepart.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.ArriveDepart.Width = 150;
+            // 
+            // OnDemand
+            // 
+            this.OnDemand.HeaderText = "On-Demand";
+            this.OnDemand.Items.AddRange(new object[] {
+            "N",
+            "Y"});
+            this.OnDemand.MinimumWidth = 8;
+            this.OnDemand.Name = "OnDemand";
+            this.OnDemand.Width = 150;
             // 
             // DriverDatabaseForm
             // 
@@ -134,6 +211,8 @@ namespace DriverLogProject
             this.menuStrip1.PerformLayout();
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1TablePanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -149,6 +228,11 @@ namespace DriverLogProject
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ComboBox VehicleList;
         private System.Windows.Forms.Button activateVehicle;
+        private System.Windows.Forms.TableLayoutPanel tabPage1TablePanel;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Building;
+        private System.Windows.Forms.DataGridViewComboBoxColumn ArriveDepart;
+        private System.Windows.Forms.DataGridViewComboBoxColumn OnDemand;
     }
 }
 

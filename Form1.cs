@@ -66,7 +66,7 @@ namespace DriverLogProject
 
         //Invoke this whenever the vehicle selection is changed
         private void DisableTabControls() {
-            foreach (Control item in tabPage1.Controls)
+            foreach (Control item in tabPage1TablePanel.Controls)
             {
                 if (item.Name == "activateVehicle" || item.Name == "VehicleList")
                 {
@@ -79,9 +79,29 @@ namespace DriverLogProject
             }
         }
 
+        private void EnableTabControls()
+        {
+            foreach (Control item in tabPage1TablePanel.Controls)
+            {
+                item.Enabled = true;
+            }
+        }
+
         private void VehicleList_SelectedIndexChanged(object sender, EventArgs e)
         {
             DisableTabControls();
         }
+
+        private void activateVehicle_Click(object sender, EventArgs e)
+        {
+
+            if (VehicleList.SelectedItem != null)
+            {
+                EnableTabControls();
+            }
+                
+        }
+
+        
     }
 }
