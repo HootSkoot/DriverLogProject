@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SQLite;
+
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Data.Sqlite;
+using System.Data;
+//using System.Data.SQLite;
 
 namespace DriverLogProject
 {
-    class SQLiteHelper
+    public class SQLiteHelper
     {
         private string db;
 
@@ -23,7 +25,7 @@ namespace DriverLogProject
             db = _db;
         }
 
-        private SQLiteConnection GetConnection() => new SQLiteConnection("Data source=" + db);
+        private SqliteConnection GetConnection() => new SqliteConnection("Data source=" + db);
 
 
         /// <summary>
@@ -31,7 +33,7 @@ namespace DriverLogProject
         /// </summary>
         /// <param name="statement">Use "@param1" and so on in statement</param>
         /// <param name="param"></param>
-        private void DBActionWithParams(String statement, Array param)
+        public void DBActionWithParams(String statement, Array param)
         {
             ExecuteWithConnection(connection =>
             {
@@ -42,14 +44,16 @@ namespace DriverLogProject
                     int count = 1;
                     foreach (var item in param)
                     {
-                        command.Parameters.Add(new SQLiteParameter("@param" + count, item));
+                        //command.Parameters.Add(new SqliteParameter("@param" + count, item));
+                        command.Parameters.AddWithValue(String.Concat("@param" + count), item);
+                        count++;
                     }
                     command.ExecuteNonQuery();
                 }
             });
         }
 
-        private void DBActionNoParams(String statement)
+        public void DBActionNoParams(String statement)
         {
             ExecuteWithConnection(connection =>
             {
@@ -62,7 +66,28 @@ namespace DriverLogProject
             });
         }
 
-        private void ExecuteWithConnection(Action<SQLiteConnection> action)
+        public DataTable DBDataTableReturnNoParams(string statement)
+        {
+
+            DataTable table = new DataTable();
+            ExecuteWithConnection(connection =>
+            {
+                
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = statement;
+                    command.CommandType = CommandType.Text;
+                    SqliteDataReader reader = command.ExecuteReader();
+                    table.Load(reader);
+                    
+                }
+                
+            });
+            return table;
+            
+        }
+
+        private void ExecuteWithConnection(Action<SqliteConnection> action)
         {
             using (var connection = GetConnection())
             {
@@ -72,7 +97,7 @@ namespace DriverLogProject
             }
         }
 
-        private T ExecuteWithConnection<T>(Func<SQLiteConnection, T> action)
+        private T ExecuteWithConnection<T>(Func<SqliteConnection, T> action)
         {
             using (var connection = GetConnection())
             {
@@ -82,9 +107,6 @@ namespace DriverLogProject
             }
         }
 
-        private static void InsertScheduleSchema(IDbCommand command)
-        {
-
-        }
+        
     }
 }

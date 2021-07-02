@@ -52,6 +52,8 @@ namespace DriverLogProject
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.VehicleSumList = new System.Windows.Forms.CheckedListBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.selectDateButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -111,14 +113,18 @@ namespace DriverLogProject
             // 
             // tabPage1TablePanel
             // 
-            this.tabPage1TablePanel.ColumnCount = 4;
+            this.tabPage1TablePanel.ColumnCount = 6;
             this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
-            this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 580F));
+            this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 230F));
             this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 206F));
             this.tabPage1TablePanel.Controls.Add(this.VehicleList, 0, 0);
             this.tabPage1TablePanel.Controls.Add(this.activateVehicle, 1, 0);
             this.tabPage1TablePanel.Controls.Add(this.dataGridView1, 0, 2);
+            this.tabPage1TablePanel.Controls.Add(this.dateTimePicker1, 3, 0);
+            this.tabPage1TablePanel.Controls.Add(this.selectDateButton, 4, 0);
             this.tabPage1TablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabPage1TablePanel.Location = new System.Drawing.Point(0, 0);
             this.tabPage1TablePanel.Name = "tabPage1TablePanel";
@@ -164,7 +170,7 @@ namespace DriverLogProject
             this.DepartTime,
             this.Pieces,
             this.Utilization});
-            this.tabPage1TablePanel.SetColumnSpan(this.dataGridView1, 3);
+            this.tabPage1TablePanel.SetColumnSpan(this.dataGridView1, 5);
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridView1.Location = new System.Drawing.Point(3, 49);
@@ -291,6 +297,24 @@ namespace DriverLogProject
             this.VehicleSumList.Size = new System.Drawing.Size(203, 227);
             this.VehicleSumList.TabIndex = 0;
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dateTimePicker1.Location = new System.Drawing.Point(503, 3);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(194, 26);
+            this.dateTimePicker1.TabIndex = 4;
+            // 
+            // selectDateButton
+            // 
+            this.selectDateButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.selectDateButton.Location = new System.Drawing.Point(703, 3);
+            this.selectDateButton.Name = "selectDateButton";
+            this.selectDateButton.Size = new System.Drawing.Size(224, 29);
+            this.selectDateButton.TabIndex = 5;
+            this.selectDateButton.Text = "Select Date";
+            this.selectDateButton.UseVisualStyleBackColor = true;
+            // 
             // DriverDatabaseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -337,6 +361,8 @@ namespace DriverLogProject
         private System.Windows.Forms.DataGridViewTextBoxColumn Utilization;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.CheckedListBox VehicleSumList;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Button selectDateButton;
     }
 }
 
