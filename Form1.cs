@@ -17,8 +17,10 @@ namespace DriverLogProject
     public partial class DriverDatabaseForm : Form
     {
 
+
         private BindingList<string> bindinglist { get; set; }
-        private VehicleScheduleSetting sch;
+        private string db = "InMemorySample;Mode=Memory;Cache=Shared";
+        private VehicleHandler handler;
         public DriverDatabaseForm()
         {
             InitializeComponent();
@@ -47,8 +49,8 @@ namespace DriverLogProject
 
             DisableTabControls();
 
-            dataGridView1.Columns["ArriveTime"].DefaultCellStyle.Format = "t";
-            dataGridView1.Columns["DepartTime"].DefaultCellStyle.Format = "t";
+            driverLogTable.Columns["ArriveTime"].DefaultCellStyle.Format = "t";
+            driverLogTable.Columns["DepartTime"].DefaultCellStyle.Format = "t";
 
             //VehicleList.Items.AddRange(Properties.Settings.Default.VehicleList.Cast<string>().ToArray());
         }
@@ -89,6 +91,10 @@ namespace DriverLogProject
             {
                 MessageBox.Show("Invalid Truck Name");
             }
+
+            VehicleHandler handler = new VehicleHandler(input, db);
+            handler.CreateVehicleTable();
+            handler = null;
         }
 
         //Invoke this whenever the vehicle selection is changed
@@ -117,6 +123,7 @@ namespace DriverLogProject
         private void VehicleList_SelectedIndexChanged(object sender, EventArgs e)
         {
             DisableTabControls();
+            handler = null;
         }
 
         private void activateVehicle_Click(object sender, EventArgs e)
@@ -125,27 +132,56 @@ namespace DriverLogProject
             if (VehicleList.SelectedItem != null)
             {
                 EnableTabControls();
-                VehicleHandler handler = new VehicleHandler(VehicleList.SelectedItem.ToString());
+                VehicleHandler handler = new VehicleHandler(VehicleList.SelectedItem.ToString(), db);
 
             }
                 
         }
 
-        private void CreateVehicleScheduleTables(String _name)
+        /// <summary>
+        /// Basic data insertion button, creates a dictionary of rows to List of row parameters to pass to vehicle handler
+        /// for OnTime: 0 - not relevant, 1 - Not on time, 2 - on time
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void logDataButton_Click(object sender, EventArgs e)
         {
-            /*sch = new VehicleScheduleSetting();
-
-            if (this.DataBindings.)
+            if (driverLogTable.Rows.Count > 0)
             {
+                var driverTableItems = new List<object>();
+                Dictionary<string, List<object>> rowDict = new Dictionary<string, List<object>>();
 
-            }*/
+                int count = 1;
 
-            //Create or update table with SQLITE
-            //for each row, insert arrival and departure
-            //save index as hidden column
+                foreach (DataGridViewRow row in driverLogTable.Rows)
+                {
+                    driverTableItems = new List<object>();
+
+                    driverTableItems.Add(row.Cells["Buildings"]);
+                    driverTableItems.Add(row.Cells["OnDemand"]);
+                    driverTableItems.Add(row.Cells["ArriveDepart"]);
+                    driverTableItems.Add(row.Cells["OnTime"]);
+                    driverTableItems.Add(row.Cells["ArriveTime"]);
+                    driverTableItems.Add(row.Cells["DepartTime"]);
+                    driverTableItems.Add(row.Cells["Pieces"]);
+                    driverTableItems.Add(row.Cells["Utilization"]);
+                    driverTableItems.Add(dateTimePicker1.Value.ToString("MM/dd/yyyy"));
+
+                    rowDict.Add("row" + count, driverTableItems);
+                    count++;
+                }
+
+                handler.InsertDriverData(rowDict);
+            }
+            
+            
+
 
         }
 
+
+
+        //--------------------------------------------------------------------------------------------------------
         //
         //Taken from https://www.c-sharpcorner.com/uploadfile/ankurmee/custom-time-cell-in-datagridview/
         //
@@ -392,8 +428,10 @@ namespace DriverLogProject
             }
         }
 
+        
+
         //
-        //
+        //---------------------------------------------------------------------------------------------------------
         //
 
     }

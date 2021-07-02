@@ -33,7 +33,7 @@ namespace DriverLogProject
         /// </summary>
         /// <param name="statement">Use "@param1" and so on in statement</param>
         /// <param name="param"></param>
-        public void DBActionWithParams(String statement, Array param)
+        public void DBActionWithParams(String statement, List<object> param)
         {
             ExecuteWithConnection(connection =>
             {

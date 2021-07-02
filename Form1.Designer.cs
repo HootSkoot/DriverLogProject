@@ -29,9 +29,9 @@ namespace DriverLogProject
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.actionsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAddVehicle = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,7 +40,15 @@ namespace DriverLogProject
             this.tabPage1TablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.VehicleList = new System.Windows.Forms.ComboBox();
             this.activateVehicle = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.driverLogTable = new System.Windows.Forms.DataGridView();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.VehicleSumList = new System.Windows.Forms.CheckedListBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.selectDateButton = new System.Windows.Forms.Button();
+            this.logDataButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Building = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OnDemand = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.ArriveDepart = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -49,16 +57,11 @@ namespace DriverLogProject
             this.DepartTime = new DriverLogProject.DriverDatabaseForm.CalendarColumn();
             this.Pieces = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Utilization = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.VehicleSumList = new System.Windows.Forms.CheckedListBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.selectDateButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage1TablePanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.driverLogTable)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -80,7 +83,7 @@ namespace DriverLogProject
             this.actionsMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuAddVehicle});
             this.actionsMenu.Name = "actionsMenu";
-            this.actionsMenu.Size = new System.Drawing.Size(87, 29);
+            this.actionsMenu.Size = new System.Drawing.Size(87, 30);
             this.actionsMenu.Text = "Actions";
             // 
             // menuAddVehicle
@@ -122,16 +125,19 @@ namespace DriverLogProject
             this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 206F));
             this.tabPage1TablePanel.Controls.Add(this.VehicleList, 0, 0);
             this.tabPage1TablePanel.Controls.Add(this.activateVehicle, 1, 0);
-            this.tabPage1TablePanel.Controls.Add(this.dataGridView1, 0, 2);
+            this.tabPage1TablePanel.Controls.Add(this.driverLogTable, 0, 2);
             this.tabPage1TablePanel.Controls.Add(this.dateTimePicker1, 3, 0);
             this.tabPage1TablePanel.Controls.Add(this.selectDateButton, 4, 0);
+            this.tabPage1TablePanel.Controls.Add(this.logDataButton, 0, 3);
+            this.tabPage1TablePanel.Controls.Add(this.label1, 2, 3);
             this.tabPage1TablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabPage1TablePanel.Location = new System.Drawing.Point(0, 0);
             this.tabPage1TablePanel.Name = "tabPage1TablePanel";
-            this.tabPage1TablePanel.RowCount = 3;
+            this.tabPage1TablePanel.RowCount = 4;
             this.tabPage1TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tabPage1TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 11F));
             this.tabPage1TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tabPage1TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tabPage1TablePanel.Size = new System.Drawing.Size(1136, 466);
             this.tabPage1TablePanel.TabIndex = 3;
             // 
@@ -157,11 +163,12 @@ namespace DriverLogProject
             this.activateVehicle.UseVisualStyleBackColor = true;
             this.activateVehicle.Click += new System.EventHandler(this.activateVehicle_Click);
             // 
-            // dataGridView1
+            // driverLogTable
             // 
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.driverLogTable.AllowUserToDeleteRows = false;
+            this.driverLogTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.driverLogTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
             this.Building,
             this.OnDemand,
             this.ArriveDepart,
@@ -170,98 +177,16 @@ namespace DriverLogProject
             this.DepartTime,
             this.Pieces,
             this.Utilization});
-            this.tabPage1TablePanel.SetColumnSpan(this.dataGridView1, 5);
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 49);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowHeadersWidth = 62;
-            this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(924, 414);
-            this.dataGridView1.TabIndex = 3;
-            // 
-            // Building
-            // 
-            this.Building.HeaderText = "Building";
-            this.Building.MinimumWidth = 8;
-            this.Building.Name = "Building";
-            this.Building.Width = 150;
-            // 
-            // OnDemand
-            // 
-            this.OnDemand.HeaderText = "On-Demand";
-            this.OnDemand.Items.AddRange(new object[] {
-            "N",
-            "Y"});
-            this.OnDemand.MinimumWidth = 8;
-            this.OnDemand.Name = "OnDemand";
-            this.OnDemand.Width = 150;
-            // 
-            // ArriveDepart
-            // 
-            this.ArriveDepart.HeaderText = "Arrival/Departure";
-            this.ArriveDepart.Items.AddRange(new object[] {
-            "",
-            "A",
-            "D"});
-            this.ArriveDepart.MinimumWidth = 8;
-            this.ArriveDepart.Name = "ArriveDepart";
-            this.ArriveDepart.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ArriveDepart.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.ArriveDepart.Width = 150;
-            // 
-            // OnTime
-            // 
-            this.OnTime.FalseValue = "false";
-            this.OnTime.HeaderText = "On Time?";
-            this.OnTime.IndeterminateValue = "null";
-            this.OnTime.MinimumWidth = 8;
-            this.OnTime.Name = "OnTime";
-            this.OnTime.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.OnTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.OnTime.ThreeState = true;
-            this.OnTime.TrueValue = "true";
-            this.OnTime.Width = 150;
-            // 
-            // ArriveTime
-            // 
-            dataGridViewCellStyle4.Format = "t";
-            this.ArriveTime.DefaultCellStyle = dataGridViewCellStyle4;
-            this.ArriveTime.HeaderText = "Arrival Time";
-            this.ArriveTime.MinimumWidth = 8;
-            this.ArriveTime.Name = "ArriveTime";
-            this.ArriveTime.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ArriveTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.ArriveTime.Width = 150;
-            // 
-            // DepartTime
-            // 
-            dataGridViewCellStyle5.Format = "t";
-            this.DepartTime.DefaultCellStyle = dataGridViewCellStyle5;
-            this.DepartTime.HeaderText = "Departure Time";
-            this.DepartTime.MinimumWidth = 8;
-            this.DepartTime.Name = "DepartTime";
-            this.DepartTime.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DepartTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.DepartTime.Width = 150;
-            // 
-            // Pieces
-            // 
-            this.Pieces.HeaderText = "Pieces Carried";
-            this.Pieces.MinimumWidth = 8;
-            this.Pieces.Name = "Pieces";
-            this.Pieces.Width = 150;
-            // 
-            // Utilization
-            // 
-            dataGridViewCellStyle6.Format = "n%";
-            dataGridViewCellStyle6.NullValue = null;
-            this.Utilization.DefaultCellStyle = dataGridViewCellStyle6;
-            this.Utilization.HeaderText = "Utilization";
-            this.Utilization.MinimumWidth = 8;
-            this.Utilization.Name = "Utilization";
-            this.Utilization.Width = 150;
+            this.tabPage1TablePanel.SetColumnSpan(this.driverLogTable, 5);
+            this.driverLogTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.driverLogTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.driverLogTable.Location = new System.Drawing.Point(3, 49);
+            this.driverLogTable.Name = "driverLogTable";
+            this.driverLogTable.RowHeadersVisible = false;
+            this.driverLogTable.RowHeadersWidth = 62;
+            this.driverLogTable.RowTemplate.Height = 28;
+            this.driverLogTable.Size = new System.Drawing.Size(924, 379);
+            this.driverLogTable.TabIndex = 3;
             // 
             // tabPage2
             // 
@@ -315,6 +240,118 @@ namespace DriverLogProject
             this.selectDateButton.Text = "Select Date";
             this.selectDateButton.UseVisualStyleBackColor = true;
             // 
+            // logDataButton
+            // 
+            this.logDataButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logDataButton.Location = new System.Drawing.Point(3, 434);
+            this.logDataButton.Name = "logDataButton";
+            this.logDataButton.Size = new System.Drawing.Size(144, 29);
+            this.logDataButton.TabIndex = 6;
+            this.logDataButton.Text = "Log Data";
+            this.logDataButton.UseVisualStyleBackColor = true;
+            this.logDataButton.Click += new System.EventHandler(this.logDataButton_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.tabPage1TablePanel.SetColumnSpan(this.label1, 3);
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Location = new System.Drawing.Point(353, 431);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(574, 35);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Square: Not Relevant, Empty: Not On Time, Check: On Time";
+            // 
+            // id
+            // 
+            this.id.HeaderText = "id";
+            this.id.MinimumWidth = 8;
+            this.id.Name = "id";
+            this.id.Visible = false;
+            this.id.Width = 150;
+            // 
+            // Building
+            // 
+            this.Building.HeaderText = "Building";
+            this.Building.MinimumWidth = 8;
+            this.Building.Name = "Building";
+            this.Building.Width = 150;
+            // 
+            // OnDemand
+            // 
+            this.OnDemand.HeaderText = "On-Demand";
+            this.OnDemand.Items.AddRange(new object[] {
+            "N",
+            "Y"});
+            this.OnDemand.MinimumWidth = 8;
+            this.OnDemand.Name = "OnDemand";
+            this.OnDemand.Width = 150;
+            // 
+            // ArriveDepart
+            // 
+            this.ArriveDepart.HeaderText = "Arrival/Departure";
+            this.ArriveDepart.Items.AddRange(new object[] {
+            "",
+            "A",
+            "D"});
+            this.ArriveDepart.MinimumWidth = 8;
+            this.ArriveDepart.Name = "ArriveDepart";
+            this.ArriveDepart.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ArriveDepart.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.ArriveDepart.Width = 150;
+            // 
+            // OnTime
+            // 
+            this.OnTime.FalseValue = "1";
+            this.OnTime.HeaderText = "On Time?";
+            this.OnTime.IndeterminateValue = "0";
+            this.OnTime.MinimumWidth = 8;
+            this.OnTime.Name = "OnTime";
+            this.OnTime.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.OnTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.OnTime.ThreeState = true;
+            this.OnTime.TrueValue = "2";
+            this.OnTime.Width = 150;
+            // 
+            // ArriveTime
+            // 
+            dataGridViewCellStyle1.Format = "t";
+            this.ArriveTime.DefaultCellStyle = dataGridViewCellStyle1;
+            this.ArriveTime.HeaderText = "Arrival Time";
+            this.ArriveTime.MinimumWidth = 8;
+            this.ArriveTime.Name = "ArriveTime";
+            this.ArriveTime.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ArriveTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.ArriveTime.Width = 150;
+            // 
+            // DepartTime
+            // 
+            dataGridViewCellStyle2.Format = "t";
+            this.DepartTime.DefaultCellStyle = dataGridViewCellStyle2;
+            this.DepartTime.HeaderText = "Departure Time";
+            this.DepartTime.MinimumWidth = 8;
+            this.DepartTime.Name = "DepartTime";
+            this.DepartTime.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.DepartTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.DepartTime.Width = 150;
+            // 
+            // Pieces
+            // 
+            this.Pieces.HeaderText = "Pieces Carried";
+            this.Pieces.MinimumWidth = 8;
+            this.Pieces.Name = "Pieces";
+            this.Pieces.Width = 150;
+            // 
+            // Utilization
+            // 
+            dataGridViewCellStyle3.Format = "n%";
+            dataGridViewCellStyle3.NullValue = null;
+            this.Utilization.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Utilization.HeaderText = "Utilization";
+            this.Utilization.MinimumWidth = 8;
+            this.Utilization.Name = "Utilization";
+            this.Utilization.Width = 150;
+            // 
             // DriverDatabaseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -331,7 +368,8 @@ namespace DriverLogProject
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1TablePanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tabPage1TablePanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.driverLogTable)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -350,7 +388,14 @@ namespace DriverLogProject
         private System.Windows.Forms.ComboBox VehicleList;
         private System.Windows.Forms.Button activateVehicle;
         private System.Windows.Forms.TableLayoutPanel tabPage1TablePanel;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView driverLogTable;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.CheckedListBox VehicleSumList;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Button selectDateButton;
+        private System.Windows.Forms.Button logDataButton;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Building;
         private System.Windows.Forms.DataGridViewComboBoxColumn OnDemand;
         private System.Windows.Forms.DataGridViewComboBoxColumn ArriveDepart;
@@ -359,10 +404,6 @@ namespace DriverLogProject
         private CalendarColumn DepartTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn Pieces;
         private System.Windows.Forms.DataGridViewTextBoxColumn Utilization;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.CheckedListBox VehicleSumList;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Button selectDateButton;
     }
 }
 
