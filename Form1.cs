@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Data.Sqlite;
 using Microsoft.VisualBasic;
 
 namespace DriverLogProject
@@ -19,7 +20,9 @@ namespace DriverLogProject
 
 
         private BindingList<string> bindinglist { get; set; }
-        private string db = "InMemorySample;Mode=Memory;Cache=Shared";
+        //private string db = "InMemorySample;Mode=Memory;Cache=Shared";
+        //private string db = ".\\DriverDatabase.db";
+        private string db = "DriverDatabase.db";
         private VehicleHandler handler;
         public DriverDatabaseForm()
         {
@@ -54,8 +57,8 @@ namespace DriverLogProject
 
             //VehicleList.Items.AddRange(Properties.Settings.Default.VehicleList.Cast<string>().ToArray());
         }
-
-        private SQLiteConnection GetConnection() => new SQLiteConnection("Data source=DriverDatabase.db");
+        /*
+        private SQLiteConnection GetConnection() => new SQLiteConnection("Data source=" + db);
 
         private void ExecuteWithConnection(Action<SQLiteConnection> action)
         {
@@ -76,6 +79,7 @@ namespace DriverLogProject
                 return action(connection);
             }
         }
+        */
 
         private void MenuAddVehicle_Click(object sender, EventArgs e)
         {
@@ -94,7 +98,7 @@ namespace DriverLogProject
 
             VehicleHandler handler = new VehicleHandler(input, db);
             handler.CreateVehicleTable();
-            handler = null;
+            
         }
 
         //Invoke this whenever the vehicle selection is changed
@@ -132,7 +136,7 @@ namespace DriverLogProject
             if (VehicleList.SelectedItem != null)
             {
                 EnableTabControls();
-                VehicleHandler handler = new VehicleHandler(VehicleList.SelectedItem.ToString(), db);
+                //VehicleHandler handler = new VehicleHandler(VehicleList.SelectedItem.ToString(), db);
 
             }
                 
@@ -146,6 +150,7 @@ namespace DriverLogProject
         /// <param name="e"></param>
         private void logDataButton_Click(object sender, EventArgs e)
         {
+            handler = new VehicleHandler(VehicleList.SelectedItem.ToString(), db);
             if (driverLogTable.Rows.Count > 0)
             {
                 var driverTableItems = new List<object>();
@@ -155,32 +160,98 @@ namespace DriverLogProject
 
                 foreach (DataGridViewRow row in driverLogTable.Rows)
                 {
-                    driverTableItems = new List<object>();
+                    if (row.Cells["Building"].Value != null && row.Cells["Building"].Value.ToString().Length > 1)
+                    {
+                        driverTableItems = new List<object>();
 
-                    driverTableItems.Add(row.Cells["Buildings"]);
-                    driverTableItems.Add(row.Cells["OnDemand"]);
-                    driverTableItems.Add(row.Cells["ArriveDepart"]);
-                    driverTableItems.Add(row.Cells["OnTime"]);
-                    driverTableItems.Add(row.Cells["ArriveTime"]);
-                    driverTableItems.Add(row.Cells["DepartTime"]);
-                    driverTableItems.Add(row.Cells["Pieces"]);
-                    driverTableItems.Add(row.Cells["Utilization"]);
-                    driverTableItems.Add(dateTimePicker1.Value.ToString("MM/dd/yyyy"));
+                        DateTime depart = (DateTime)row.Cells["DepartTime"].Value;
+                        DateTime arrive = (DateTime)row.Cells["ArriveTime"].Value;
 
-                    rowDict.Add("row" + count, driverTableItems);
-                    count++;
+                        driverTableItems.Add(row.Cells["Building"].Value);
+                        driverTableItems.Add(row.Cells["OnDemand"].Value);
+                        driverTableItems.Add(row.Cells["ArriveDepart"].Value);
+                        driverTableItems.Add(row.Cells["OnTime"].Value ?? 0);
+                        driverTableItems.Add((DateTime)row.Cells["ArriveTime"].Value);
+                        driverTableItems.Add(arrive.ToShortDateString());
+                        driverTableItems.Add(arrive.ToShortTimeString());
+                        driverTableItems.Add((DateTime)row.Cells["DepartTime"].Value);
+                        driverTableItems.Add(row.Cells["Pieces"].Value);
+                        driverTableItems.Add(row.Cells["Utilization"].Value);
+                        driverTableItems.Add(dateTimePicker1.Value.ToString("MM/dd/yyyy"));
+
+                        rowDict.Add("row" + count, driverTableItems);
+                        count++;
+                    }
+                    
                 }
 
-                handler.InsertDriverData(rowDict);
+                handler.InsertDriverData(rowDict,null);
+            }
+            
+        }
+
+        private void selectDateButton_Click(object sender, EventArgs e)
+        {
+            handler = new VehicleHandler(VehicleList.SelectedItem.ToString(), db);
+
+            if (driverLogTable.Rows.Count > 1 || driverLogTable.Rows[0].Cells["Building"].Value == null)
+            {
+                driverLogTable.Rows.Clear();
             }
             
             
+            foreach (DataRow row in handler.RetrieveDriverData(dateTimePicker1.Value.ToString("MM/dd/yyyy")).Rows)
+            {
+                driverLogTable.Rows.Add(row["id"], row["Building"], row["OnDemand"], row["ArriveDepart"], row["OnTime"],DateTime.Parse(row["ArriveTime"].ToString()), row["ArriveActualDate"], row["ArriveActualTime"], DateTime.Parse(row["DepartTime"].ToString()), row["Pieces"], row["Utilization"], row["LoggingDate"]);
+                
+            }
+
 
 
         }
 
+        private void updateButton_Click(object sender, EventArgs e)
+        {
+            handler = new VehicleHandler(VehicleList.SelectedItem.ToString(), db);
+            if (driverLogTable.Rows.Count > 0)
+            {
+                var driverTableItems = new List<object>();
+                Dictionary<string, List<object>> rowDict = new Dictionary<string, List<object>>();
 
+                int count = 1;
 
+                foreach (DataGridViewRow row in driverLogTable.Rows)
+                {
+                    if (row.Cells["Building"].Value != null && row.Cells["Building"].Value.ToString().Length > 1)
+                    {
+                        driverTableItems = new List<object>();
+
+                        DateTime depart = (DateTime)row.Cells["DepartTime"].Value;
+                        DateTime arrive = (DateTime)row.Cells["ArriveTime"].Value;
+
+                        driverTableItems.Add(row.Cells["id"].Value);
+                        driverTableItems.Add(row.Cells["Building"].Value);
+                        driverTableItems.Add(row.Cells["OnDemand"].Value);
+                        driverTableItems.Add(row.Cells["ArriveDepart"].Value);
+                        driverTableItems.Add(row.Cells["OnTime"].Value ?? 0);
+                        driverTableItems.Add((DateTime)row.Cells["ArriveTime"].Value);
+                        driverTableItems.Add(arrive.ToShortDateString());
+                        driverTableItems.Add(arrive.ToShortTimeString());
+                        driverTableItems.Add((DateTime)row.Cells["DepartTime"].Value);
+                        driverTableItems.Add(row.Cells["Pieces"].Value);
+                        driverTableItems.Add(row.Cells["Utilization"].Value);
+                        driverTableItems.Add(dateTimePicker1.Value.ToString("MM/dd/yyyy"));
+
+                        rowDict.Add("row" + count, driverTableItems);
+                        count++;
+                    }
+
+                }
+                
+                handler.UpdateDriverData(rowDict, null);
+            }
+        }
+        
         //--------------------------------------------------------------------------------------------------------
         //
         //Taken from https://www.c-sharpcorner.com/uploadfile/ankurmee/custom-time-cell-in-datagridview/
@@ -427,12 +498,8 @@ namespace DriverLogProject
                 base.OnValueChanged(eventargs);
             }
         }
-
-        
-
         //
         //---------------------------------------------------------------------------------------------------------
         //
-
     }
 }

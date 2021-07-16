@@ -37,6 +37,7 @@ namespace DriverLogProject
         {
             ExecuteWithConnection(connection =>
             {
+                using (var tx = connection.BeginTransaction())
                 using (var command = connection.CreateCommand())
                 {
                     command.CommandText = statement;
@@ -49,6 +50,7 @@ namespace DriverLogProject
                         count++;
                     }
                     command.ExecuteNonQuery();
+                    tx.Commit();
                 }
             });
         }
@@ -57,11 +59,13 @@ namespace DriverLogProject
         {
             ExecuteWithConnection(connection =>
             {
+                using (var tx = connection.BeginTransaction())
                 using (var command = connection.CreateCommand())
                 {
                     command.CommandText = statement;
                     command.CommandType = CommandType.Text;
                     command.ExecuteNonQuery();
+                    tx.Commit();
                 }
             });
         }
@@ -72,19 +76,97 @@ namespace DriverLogProject
             DataTable table = new DataTable();
             ExecuteWithConnection(connection =>
             {
-                
+                using (var tx = connection.BeginTransaction())
                 using (var command = connection.CreateCommand())
                 {
                     command.CommandText = statement;
                     command.CommandType = CommandType.Text;
                     SqliteDataReader reader = command.ExecuteReader();
                     table.Load(reader);
-                    
+                    tx.Commit();
                 }
                 
             });
             return table;
             
+        }
+
+        public DataTable DBDataTableReturnWithParams(String statement, List<object> param)
+        {
+            DataTable table = new DataTable();
+            ExecuteWithConnection(connection =>
+            {
+                using (var tx = connection.BeginTransaction())
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = statement;
+                    command.CommandType = CommandType.Text;
+                    int count = 1;
+                    foreach (var item in param)
+                    {
+                        //command.Parameters.Add(new SqliteParameter("@param" + count, item));
+                        command.Parameters.AddWithValue(String.Concat("@param" + count), item);
+                        count++;
+                    }
+                    SqliteDataReader reader = command.ExecuteReader();
+                    table.Load(reader);
+                    tx.Commit();
+                }
+            });
+            return table;
+        }
+
+        public DataTable DBDataTableModifiedReturnWithParams(String statement, List<object> param, DataTable table)
+        {
+            
+            ExecuteWithConnection(connection =>
+            {
+                using (var tx = connection.BeginTransaction())
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = statement;
+                    command.CommandType = CommandType.Text;
+                    int count = 1;
+                    foreach (var item in param)
+                    {
+                        //command.Parameters.Add(new SqliteParameter("@param" + count, item));
+                        command.Parameters.AddWithValue(String.Concat("@param" + count), item);
+                        count++;
+                    }
+                    SqliteDataReader reader = command.ExecuteReader();
+                    table.Load(reader);
+                    tx.Commit();
+                }
+            });
+            return table;
+        }
+
+        public void DBUpdateWithParams(String statement, List<object> param, int numRows, int numItems)
+        {
+            ExecuteWithConnection(connection =>
+            {
+                using (var tx = connection.BeginTransaction())
+                using (var command = connection.CreateCommand())
+                {
+                    
+                    int count = 1;
+                    var queue = new Queue<object>(param);
+                    while (count <= numRows)
+                    {
+                        int p = 1;
+                        command.CommandText = statement;
+                        command.CommandType = CommandType.Text;
+                        command.Parameters.Clear();
+                        while (p <= numItems)
+                        {
+                            command.Parameters.AddWithValue(String.Concat("@param" + p++), queue.Dequeue());
+                        }
+                        command.ExecuteNonQuery();
+                        count++;
+                    }
+                    tx.Commit();
+                }
+            });
         }
 
         private void ExecuteWithConnection(Action<SqliteConnection> action)
