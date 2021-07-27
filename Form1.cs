@@ -22,7 +22,7 @@ namespace DriverLogProject
         private BindingList<string> bindinglist { get; set; }
         //private string db = "InMemorySample;Mode=Memory;Cache=Shared";
         //private string db = ".\\DriverDatabase.db";
-        private string db = "DriverDatabase.db";
+        private string db = "DriverDatabaseTesting.db";
         private VehicleHandler handler;
         public DriverDatabaseForm()
         {
@@ -177,7 +177,7 @@ namespace DriverLogProject
                         driverTableItems.Add((DateTime)row.Cells["DepartTime"].Value);
                         driverTableItems.Add(row.Cells["Pieces"].Value);
                         driverTableItems.Add(row.Cells["Utilization"].Value);
-                        driverTableItems.Add(dateTimePicker1.Value.ToString("MM/dd/yyyy"));
+                        driverTableItems.Add(dateTimePicker1.Value.ToString("yyyy-MM-dd"));
 
                         rowDict.Add("row" + count, driverTableItems);
                         count++;
@@ -200,7 +200,7 @@ namespace DriverLogProject
             }
             
             
-            foreach (DataRow row in handler.RetrieveDriverData(dateTimePicker1.Value.ToString("MM/dd/yyyy")).Rows)
+            foreach (DataRow row in handler.RetrieveDriverData(dateTimePicker1.Value.ToString("yyyy-MM-dd")).Rows)
             {
                 driverLogTable.Rows.Add(row["id"], row["Building"], row["OnDemand"], row["ArriveDepart"], row["OnTime"],DateTime.Parse(row["ArriveTime"].ToString()), row["ArriveActualDate"], row["ArriveActualTime"], DateTime.Parse(row["DepartTime"].ToString()), row["Pieces"], row["Utilization"], row["LoggingDate"]);
                 
@@ -240,7 +240,7 @@ namespace DriverLogProject
                         driverTableItems.Add((DateTime)row.Cells["DepartTime"].Value);
                         driverTableItems.Add(row.Cells["Pieces"].Value);
                         driverTableItems.Add(row.Cells["Utilization"].Value);
-                        driverTableItems.Add(dateTimePicker1.Value.ToString("MM/dd/yyyy"));
+                        driverTableItems.Add(dateTimePicker1.Value.ToString("yyyy-MM-dd"));
 
                         rowDict.Add("row" + count, driverTableItems);
                         count++;

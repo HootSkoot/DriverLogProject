@@ -45,10 +45,12 @@ namespace DriverLogProject
             this.selectDateButton = new System.Windows.Forms.Button();
             this.logDataButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.updateButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.VehicleSumList = new System.Windows.Forms.CheckedListBox();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VehicleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Building = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OnDemand = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.ArriveDepart = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -61,7 +63,6 @@ namespace DriverLogProject
             this.Utilization = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VehicleDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.updateButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -79,7 +80,7 @@ namespace DriverLogProject
             this.actionsMenu});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1144, 36);
+            this.menuStrip1.Size = new System.Drawing.Size(1434, 36);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -106,7 +107,7 @@ namespace DriverLogProject
             this.tabControl.Location = new System.Drawing.Point(0, 36);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1144, 499);
+            this.tabControl.Size = new System.Drawing.Size(1434, 499);
             this.tabControl.TabIndex = 0;
             // 
             // tabPage1
@@ -114,7 +115,7 @@ namespace DriverLogProject
             this.tabPage1.Controls.Add(this.tabPage1TablePanel);
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1136, 466);
+            this.tabPage1.Size = new System.Drawing.Size(1426, 466);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Vehicle Handler";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -144,7 +145,7 @@ namespace DriverLogProject
             this.tabPage1TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 11F));
             this.tabPage1TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tabPage1TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tabPage1TablePanel.Size = new System.Drawing.Size(1136, 466);
+            this.tabPage1TablePanel.Size = new System.Drawing.Size(1426, 466);
             this.tabPage1TablePanel.TabIndex = 3;
             // 
             // VehicleList
@@ -175,6 +176,7 @@ namespace DriverLogProject
             this.driverLogTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.driverLogTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
+            this.VehicleName,
             this.Building,
             this.OnDemand,
             this.ArriveDepart,
@@ -195,7 +197,7 @@ namespace DriverLogProject
             this.driverLogTable.RowHeadersVisible = false;
             this.driverLogTable.RowHeadersWidth = 62;
             this.driverLogTable.RowTemplate.Height = 28;
-            this.driverLogTable.Size = new System.Drawing.Size(924, 379);
+            this.driverLogTable.Size = new System.Drawing.Size(924, 382);
             this.driverLogTable.TabIndex = 3;
             // 
             // dateTimePicker1
@@ -220,7 +222,7 @@ namespace DriverLogProject
             // logDataButton
             // 
             this.logDataButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.logDataButton.Location = new System.Drawing.Point(3, 434);
+            this.logDataButton.Location = new System.Drawing.Point(3, 437);
             this.logDataButton.Name = "logDataButton";
             this.logDataButton.Size = new System.Drawing.Size(171, 29);
             this.logDataButton.TabIndex = 6;
@@ -233,18 +235,29 @@ namespace DriverLogProject
             this.label1.AutoSize = true;
             this.tabPage1TablePanel.SetColumnSpan(this.label1, 3);
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(353, 431);
+            this.label1.Location = new System.Drawing.Point(353, 434);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(574, 35);
             this.label1.TabIndex = 7;
             this.label1.Text = "Square: Not Relevant, Empty: Not On Time, Check: On Time";
+            // 
+            // updateButton
+            // 
+            this.updateButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.updateButton.Location = new System.Drawing.Point(180, 437);
+            this.updateButton.Name = "updateButton";
+            this.updateButton.Size = new System.Drawing.Size(167, 29);
+            this.updateButton.TabIndex = 8;
+            this.updateButton.Text = "Update Existing";
+            this.updateButton.UseVisualStyleBackColor = true;
+            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.tableLayoutPanel1);
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1136, 466);
+            this.tabPage2.Size = new System.Drawing.Size(1426, 466);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Summary";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -261,7 +274,7 @@ namespace DriverLogProject
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1136, 466);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1426, 466);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // VehicleSumList
@@ -270,7 +283,7 @@ namespace DriverLogProject
             this.VehicleSumList.FormattingEnabled = true;
             this.VehicleSumList.Location = new System.Drawing.Point(3, 3);
             this.VehicleSumList.Name = "VehicleSumList";
-            this.VehicleSumList.Size = new System.Drawing.Size(203, 227);
+            this.VehicleSumList.Size = new System.Drawing.Size(256, 227);
             this.VehicleSumList.TabIndex = 0;
             // 
             // id
@@ -281,6 +294,14 @@ namespace DriverLogProject
             this.id.Name = "id";
             this.id.Visible = false;
             this.id.Width = 150;
+            // 
+            // VehicleName
+            // 
+            this.VehicleName.HeaderText = "Vehicle Name";
+            this.VehicleName.MinimumWidth = 8;
+            this.VehicleName.Name = "VehicleName";
+            this.VehicleName.Visible = false;
+            this.VehicleName.Width = 150;
             // 
             // Building
             // 
@@ -405,22 +426,11 @@ namespace DriverLogProject
             this.VehicleDate.Visible = false;
             this.VehicleDate.Width = 150;
             // 
-            // updateButton
-            // 
-            this.updateButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.updateButton.Location = new System.Drawing.Point(180, 434);
-            this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(167, 29);
-            this.updateButton.TabIndex = 8;
-            this.updateButton.Text = "Update Existing";
-            this.updateButton.UseVisualStyleBackColor = true;
-            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
-            // 
             // DriverDatabaseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1144, 535);
+            this.ClientSize = new System.Drawing.Size(1434, 535);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -459,7 +469,9 @@ namespace DriverLogProject
         private System.Windows.Forms.Button selectDateButton;
         private System.Windows.Forms.Button logDataButton;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn VehicleName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Building;
         private System.Windows.Forms.DataGridViewComboBoxColumn OnDemand;
         private System.Windows.Forms.DataGridViewComboBoxColumn ArriveDepart;
@@ -472,7 +484,6 @@ namespace DriverLogProject
         private System.Windows.Forms.DataGridViewTextBoxColumn Utilization;
         private System.Windows.Forms.DataGridViewTextBoxColumn Date;
         private System.Windows.Forms.DataGridViewTextBoxColumn VehicleDate;
-        private System.Windows.Forms.Button updateButton;
     }
 }
 

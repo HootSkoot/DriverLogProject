@@ -28,6 +28,7 @@ namespace DriverLogProject
         private SqliteConnection GetConnection() => new SqliteConnection("Data source=" + db);
 
 
+        
         /// <summary>
         /// Insersts into DB
         /// </summary>
