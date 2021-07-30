@@ -27,7 +27,7 @@ namespace DriverLogProject
         public void CreateVehicleTable()
         {
             helper = new SQLiteHelper(db);
-            helper.DBActionNoParams($"CREATE TABLE IF NOT EXISTS '{name}' (id INTEGER NOT NULL UNIQUE PRIMARY KEY AUTOINCREMENT, Building TEXT, OnDemand TEXT, ArriveDepart TEXT, OnTime TEXT, ArriveTime TEXT, ArriveActualDate TEXT, ArriveActualTime TEXT, DepartTime TEXT, Pieces INTEGER, Utilization INTEGER, LoggingDate TEXT)");
+            helper.DBActionNoParams($"CREATE TABLE IF NOT EXISTS '{name}' (id INTEGER NOT NULL UNIQUE PRIMARY KEY AUTOINCREMENT, VehicleName TEXT, Building TEXT, OnDemand TEXT, PickDeliverBoth TEXT, OnTime TEXT, ArriveTime TEXT, ArriveActualDate TEXT, ArriveActualTime TEXT, DepartTime TEXT, PiecesPicked INTEGER, PickupUtilization INTEGER, PiecesDelivered INTEGER, DeliveryUtilization INTEGER, LoggingDate TEXT)");
         }
 
         public void InsertDriverData(Dictionary<string, List<object>> driverDict, string insertCommand)
@@ -35,7 +35,7 @@ namespace DriverLogProject
             helper = new SQLiteHelper(db);
             if (insertCommand is null)
             {
-                insertCommand = $"INSERT INTO '{name}' (Building, OnDemand, ArriveDepart, OnTime, ArriveTime, ArriveActualDate, ArriveActualTime, DepartTime, Pieces, Utilization, LoggingDate) VALUES ";
+                insertCommand = $"INSERT INTO '{name}' (VehicleName, Building, OnDemand, PickDeliverBoth, OnTime, ArriveTime, ArriveActualDate, ArriveActualTime, DepartTime, PiecesPicked, PickupUtilization, PiecesDelivered, DeliveryUtilization, LoggingDate) VALUES ";
             }
             List<object> list = new List<object>();
             int count = 1;
@@ -68,20 +68,58 @@ namespace DriverLogProject
             {
                 list.AddRange(item.Value);
             }
-            helper.DBUpdateWithParams($"UPDATE '{name}' SET Building=@param2, OnDemand=@param3, ArriveDepart=@param4, OnTime=@param5, ArriveTime=@param6, ArriveActualDate=@param7, ArriveActualTime=@param8,DepartTime=@param9,Pieces=@param10,Utilization=@param11,LoggingDate=@param12 WHERE id=@param1",list,driverDict.Count,driverDict["row1"].Count);
+            helper.DBUpdateWithParams($"UPDATE '{name}' SET VehicleName=@param2, Building=@param3, OnDemand=@param4, PickDeliverBoth=@param5, OnTime=@param6, ArriveTime=@param7, ArriveActualDate=@param8, ArriveActualTime=@param9, DepartTime=@param10, PiecesPicked=@param11, PickupUtilization=@param12, PiecesDelivered=@param13, DeliveryUtilization=@param14, LoggingDate=@param15 WHERE id=@param1",list,driverDict.Count,driverDict["row1"].Count);
         }
 
-        public DataTable RetrieveDriverData(string date)
+        public DataTable RetrieveDriverData(string date, string vehicleName)
         {
             DataTable table = new DataTable();
 
             helper = new SQLiteHelper(db);
-            string selectCommand = $"SELECT id,Building, OnDemand, ArriveDepart, OnTime, ArriveTime, datetime(ArriveActualDate) as ArriveActualDate, datetime(ArriveActualTime) as ArriveActualTime, DepartTime, Pieces, Utilization, LoggingDate from '{name}' WHERE LoggingDate=@param1";
+            string selectCommand = $"SELECT id, VehicleName, Building, OnDemand, PickDeliverBoth, OnTime, ArriveTime, datetime(ArriveActualDate) as ArriveActualDate, datetime(ArriveActualTime) as ArriveActualTime, DepartTime, PiecesPicked, PickupUtilization, PiecesDelivered, DeliveryUtilization, LoggingDate from '{name}' WHERE LoggingDate=@param1 and VehicleName=@param2";
             List<object> list = new List<object>();
             list.Add(date);
+            list.Add(vehicleName);
             return helper.DBDataTableReturnWithParams(selectCommand, list);
             
             
+        }
+
+        public Dictionary<string,double> QuerySummarizer(List<string> vehicleList, string startDate, string endDate)
+        {
+            Dictionary<string,double> results = new Dictionary<string, double>();
+
+            DataTable table = BuildMultipleVehiclesInQueryString(vehicleList, startDate, endDate);
+
+            results.Add("TotalTrips", table.Rows.Count);
+            results.Add("TotalScheduledTrips", Convert.ToDouble(table.Compute("Count(OnDemand)", "OnDemand='N' or OnDemand=''")));
+
+            return results;
+        }
+
+        private DataTable BuildMultipleVehiclesInQueryString(List<string> vehicleList, string startDate, string endDate)
+        {
+            DataTable table = new DataTable();
+
+            helper = new SQLiteHelper(db);
+
+            List<object> list = new List<object>();
+            
+
+            string query = $"SELECT * FROM '{name}' WHERE ";
+            int count = 1;
+            foreach (string item in vehicleList)
+            {
+                query += "VehicleName=@param" + count + (count==vehicleList.Count ? "" : " and ");
+                count++;
+                list.Add(item);
+            }
+            query += " and date(LoggingDate)>=date(@param" + count++ + ") and date(LoggingDate)<=date(@param" + count++ + ")";
+
+            list.Add(startDate);
+            list.Add(endDate);
+
+            return helper.DBDataTableReturnWithParams(query, list);
         }
 
         private string BuildParameterQueryString(List<object> list, ref int startingNum)

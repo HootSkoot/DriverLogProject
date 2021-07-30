@@ -23,6 +23,7 @@ namespace DriverLogProject
         //private string db = "InMemorySample;Mode=Memory;Cache=Shared";
         //private string db = ".\\DriverDatabase.db";
         private string db = "DriverDatabaseTesting.db";
+        private string vehicleTable = "VehicleSchedule";
         private VehicleHandler handler;
         public DriverDatabaseForm()
         {
@@ -81,22 +82,35 @@ namespace DriverLogProject
         }
         */
 
+        private void ClearVehicleTable()
+        {
+            if (driverLogTable.Rows.Count > 1 || driverLogTable.Rows[0].Cells["Building"].Value == null)
+            {
+                driverLogTable.Rows.Clear();
+            }
+        }
+
         private void MenuAddVehicle_Click(object sender, EventArgs e)
         {
             String input = Interaction.InputBox("Enter an alphanumeric name, use underscores for spaces", "Vehicle Name", default);
 
             if (Regex.IsMatch(input, "^[a-zA-Z0-9_]*$"))
             {
-                Properties.Settings.Default.VehicleList.Add(input);
-                Properties.Settings.Default.Save();
-                bindinglist.Add(input);
+                if (!Properties.Settings.Default.VehicleList.Contains(input))
+                {
+                    Properties.Settings.Default.VehicleList.Add(input);
+                    Properties.Settings.Default.Save();
+                    bindinglist.Add(input);
+                }
+                
+                
             }
             else
             {
                 MessageBox.Show("Invalid Truck Name");
             }
 
-            VehicleHandler handler = new VehicleHandler(input, db);
+            VehicleHandler handler = new VehicleHandler(vehicleTable, db);
             handler.CreateVehicleTable();
             
         }
@@ -126,6 +140,7 @@ namespace DriverLogProject
 
         private void VehicleList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ClearVehicleTable();
             DisableTabControls();
             handler = null;
         }
@@ -150,7 +165,7 @@ namespace DriverLogProject
         /// <param name="e"></param>
         private void logDataButton_Click(object sender, EventArgs e)
         {
-            handler = new VehicleHandler(VehicleList.SelectedItem.ToString(), db);
+            handler = new VehicleHandler(vehicleTable, db);
             if (driverLogTable.Rows.Count > 0)
             {
                 var driverTableItems = new List<object>();
@@ -166,17 +181,19 @@ namespace DriverLogProject
 
                         DateTime depart = (DateTime)row.Cells["DepartTime"].Value;
                         DateTime arrive = (DateTime)row.Cells["ArriveTime"].Value;
-
+                        driverTableItems.Add(VehicleList.SelectedItem.ToString());
                         driverTableItems.Add(row.Cells["Building"].Value);
                         driverTableItems.Add(row.Cells["OnDemand"].Value);
-                        driverTableItems.Add(row.Cells["ArriveDepart"].Value);
+                        driverTableItems.Add(row.Cells["PickDeliverBoth"].Value);
                         driverTableItems.Add(row.Cells["OnTime"].Value ?? 0);
                         driverTableItems.Add((DateTime)row.Cells["ArriveTime"].Value);
                         driverTableItems.Add(arrive.ToShortDateString());
                         driverTableItems.Add(arrive.ToShortTimeString());
                         driverTableItems.Add((DateTime)row.Cells["DepartTime"].Value);
-                        driverTableItems.Add(row.Cells["Pieces"].Value);
-                        driverTableItems.Add(row.Cells["Utilization"].Value);
+                        driverTableItems.Add(row.Cells["PiecesPicked"].Value);
+                        driverTableItems.Add(row.Cells["PickupUtilization"].Value);
+                        driverTableItems.Add(row.Cells["PiecesDelivered"].Value);
+                        driverTableItems.Add(row.Cells["DeliveryUtilization"].Value);
                         driverTableItems.Add(dateTimePicker1.Value.ToString("yyyy-MM-dd"));
 
                         rowDict.Add("row" + count, driverTableItems);
@@ -192,17 +209,14 @@ namespace DriverLogProject
 
         private void selectDateButton_Click(object sender, EventArgs e)
         {
-            handler = new VehicleHandler(VehicleList.SelectedItem.ToString(), db);
+            handler = new VehicleHandler(vehicleTable, db);
 
-            if (driverLogTable.Rows.Count > 1 || driverLogTable.Rows[0].Cells["Building"].Value == null)
-            {
-                driverLogTable.Rows.Clear();
-            }
+            ClearVehicleTable();
             
             
-            foreach (DataRow row in handler.RetrieveDriverData(dateTimePicker1.Value.ToString("yyyy-MM-dd")).Rows)
+            foreach (DataRow row in handler.RetrieveDriverData(dateTimePicker1.Value.ToString("yyyy-MM-dd"),VehicleList.SelectedItem.ToString()).Rows)
             {
-                driverLogTable.Rows.Add(row["id"], row["Building"], row["OnDemand"], row["ArriveDepart"], row["OnTime"],DateTime.Parse(row["ArriveTime"].ToString()), row["ArriveActualDate"], row["ArriveActualTime"], DateTime.Parse(row["DepartTime"].ToString()), row["Pieces"], row["Utilization"], row["LoggingDate"]);
+                driverLogTable.Rows.Add(row["id"], row["VehicleName"], row["Building"], row["OnDemand"], row["PickDeliverBoth"], row["OnTime"],DateTime.Parse(row["ArriveTime"].ToString()), row["ArriveActualDate"], row["ArriveActualTime"], DateTime.Parse(row["DepartTime"].ToString()), row["PiecesPicked"], row["PickupUtilization"], row["PiecesDelivered"], row["DeliveryUtilization"], row["LoggingDate"]);
                 
             }
 
@@ -212,7 +226,7 @@ namespace DriverLogProject
 
         private void updateButton_Click(object sender, EventArgs e)
         {
-            handler = new VehicleHandler(VehicleList.SelectedItem.ToString(), db);
+            handler = new VehicleHandler(vehicleTable, db);
             if (driverLogTable.Rows.Count > 0)
             {
                 var driverTableItems = new List<object>();
@@ -230,16 +244,19 @@ namespace DriverLogProject
                         DateTime arrive = (DateTime)row.Cells["ArriveTime"].Value;
 
                         driverTableItems.Add(row.Cells["id"].Value);
+                        driverTableItems.Add(row.Cells["VehicleName"].Value);
                         driverTableItems.Add(row.Cells["Building"].Value);
                         driverTableItems.Add(row.Cells["OnDemand"].Value);
-                        driverTableItems.Add(row.Cells["ArriveDepart"].Value);
+                        driverTableItems.Add(row.Cells["PickDeliverBoth"].Value);
                         driverTableItems.Add(row.Cells["OnTime"].Value ?? 0);
                         driverTableItems.Add((DateTime)row.Cells["ArriveTime"].Value);
                         driverTableItems.Add(arrive.ToShortDateString());
                         driverTableItems.Add(arrive.ToShortTimeString());
                         driverTableItems.Add((DateTime)row.Cells["DepartTime"].Value);
-                        driverTableItems.Add(row.Cells["Pieces"].Value);
-                        driverTableItems.Add(row.Cells["Utilization"].Value);
+                        driverTableItems.Add(row.Cells["PiecesPicked"].Value);
+                        driverTableItems.Add(row.Cells["PickupUtilization"].Value);
+                        driverTableItems.Add(row.Cells["PiecesDelivered"].Value);
+                        driverTableItems.Add(row.Cells["DeliveryUtilization"].Value);
                         driverTableItems.Add(dateTimePicker1.Value.ToString("yyyy-MM-dd"));
 
                         rowDict.Add("row" + count, driverTableItems);
@@ -498,6 +515,23 @@ namespace DriverLogProject
                 base.OnValueChanged(eventargs);
             }
         }
+
+        private void dataSummaryButton_Click(object sender, EventArgs e)
+        {
+            if (VehicleSumList.CheckedItems.Count > 0)
+            {
+                handler = new VehicleHandler(vehicleTable, db);
+
+                Dictionary<string, double> results = handler.QuerySummarizer(VehicleSumList.CheckedItems.OfType<string>().ToList(), dateSummary1.Value.ToString("yyyy-MM-dd"), dateSummary2.Value.ToString("yyyy-MM-dd"));
+
+                dataBox1.Text = results["TotalTrips"].ToString("F1");
+                dataBox2.Text = results["TotalScheduledTrips"].ToString("F1");
+            }
+            
+            
+        }
+
+      
         //
         //---------------------------------------------------------------------------------------------------------
         //
