@@ -22,7 +22,7 @@ namespace DriverLogProject
         private BindingList<string> bindinglist { get; set; }
         //private string db = "InMemorySample;Mode=Memory;Cache=Shared";
         //private string db = ".\\DriverDatabase.db";
-        private string db = "DriverDatabaseTesting.db";
+        private string db = "DriverDatabaseConsolidated.db";
         private string vehicleTable = "VehicleSchedule";
         private VehicleHandler handler;
         public DriverDatabaseForm()
@@ -55,6 +55,11 @@ namespace DriverLogProject
 
             driverLogTable.Columns["ArriveTime"].DefaultCellStyle.Format = "t";
             driverLogTable.Columns["DepartTime"].DefaultCellStyle.Format = "t";
+
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateTimePicker1.CustomFormat = "MMMM dd, yyyy";
+
+            
 
             //VehicleList.Items.AddRange(Properties.Settings.Default.VehicleList.Cast<string>().ToArray());
         }
@@ -526,12 +531,42 @@ namespace DriverLogProject
 
                 dataBox1.Text = results["TotalTrips"].ToString("F1");
                 dataBox2.Text = results["TotalScheduledTrips"].ToString("F1");
+                dataBox3.Text = results["TotalPickTrips"].ToString("F1");
+                dataBox4.Text = results["TotalDeliverTrips"].ToString("F1");
+                dataBox5.Text = results["TotalOnTimeScheduledTrips"].ToString("F1");
+                dataBox6.Text = results["TotalOnTimeScheduledPickTrips"].ToString("F1");
+                dataBox7.Text = results["TotalOnTimeScheduledDeliverTrips"].ToString("F1");
+                dataBox8.Text = results["TotalOffTimeScheduledTrips"].ToString("F1");
+                dataBox9.Text = results["TotalOffTimeScheduledPickTrips"].ToString("F1");
+                dataBox10.Text = results["TotalOffTimeScheduledDeliverTrips"].ToString("F1");
+                dataBox11.Text = results["PickupAvgUtilization"].ToString("F1");
+                dataBox12.Text = results["DeliveryAvgUtilization"].ToString("F1");
+                dataBox13.Text = results["TotalPickupItems"].ToString("F1");
+                dataBox14.Text = results["TotalDeliveryItems"].ToString("F1");
+                double temp = Convert.ToDouble(results["OnTimePickupPercentage"].ToString("F1"));
+                temp *= 100.0;
+                dataBox15.Text = temp.ToString("F1");
+                temp = Convert.ToDouble(results["OnTimeDeliveryPercentage"].ToString("F1"));
+                temp *= 100.0;
+                dataBox16.Text = temp.ToString("F1");
+                dataBox17.Text = results["TotalScheduledPickups"].ToString("F1");
+                dataBox18.Text = results["TotalScheduledDelivery"].ToString("F1");
             }
             
             
         }
 
-      
+        private void driverLogTable_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
+        {
+            e.Row.Cells["PiecesPicked"].Value = 0;
+            e.Row.Cells["PickupUtilization"].Value = 0;
+            e.Row.Cells["PiecesDelivered"].Value = 0;
+            e.Row.Cells["DeliveryUtilization"].Value = 0;
+        }
+
+        
+
+
         //
         //---------------------------------------------------------------------------------------------------------
         //

@@ -90,10 +90,53 @@ namespace DriverLogProject
             Dictionary<string,double> results = new Dictionary<string, double>();
 
             DataTable table = BuildMultipleVehiclesInQueryString(vehicleList, startDate, endDate);
+            if(table.Rows.Count > 0)
+            {
+                results.Add("TotalTrips", table.Rows.Count);
+                results.Add("TotalScheduledTrips", Convert.ToDouble(table.Compute("Count(Building)", "OnDemand='N' or OnDemand=''")));
+                results.Add("TotalPickTrips", Convert.ToDouble(table.Compute("Count(Building)", "PickDeliverBoth='P' or PickDeliverBoth='B'")));
+                results.Add("TotalDeliverTrips", Convert.ToDouble(table.Compute("Count(Building)", "PickDeliverBoth='D' or PickDeliverBoth='B'")));
+                results.Add("TotalOnTimeScheduledTrips", Convert.ToDouble(table.Compute("Count(Building)", "(OnDemand='N' or OnDemand='') and OnTime=2")));
+                results.Add("TotalOnTimeScheduledPickTrips", Convert.ToDouble(table.Compute("Count(Building)", "(OnDemand='N' or OnDemand='') and (PickDeliverBoth='P'  or PickDeliverBoth='B') and OnTime=2")));
+                results.Add("TotalOnTimeScheduledDeliverTrips", Convert.ToDouble(table.Compute("Count(Building)", "(OnDemand='N' or OnDemand='') and (PickDeliverBoth='D'  or PickDeliverBoth='B') and OnTime=2")));
+                results.Add("TotalOffTimeScheduledTrips", Convert.ToDouble(table.Compute("Count(Building)", "(OnDemand='N' or OnDemand='') and OnTime=1")));
+                results.Add("TotalOffTimeScheduledPickTrips", Convert.ToDouble(table.Compute("Count(Building)", "(OnDemand='N' or OnDemand='') and OnTime=1 and (PickDeliverBoth='P' or PickDeliverBoth='B')")));
+                results.Add("TotalOffTimeScheduledDeliverTrips", Convert.ToDouble(table.Compute("Count(Building)", "(OnDemand='N' or OnDemand='') and OnTime=1 and PickDeliverBoth='D'  or PickDeliverBoth='B'")));
+                results.Add("PickupAvgUtilization", Convert.ToDouble(table.Compute("Avg(PickupUtilization)", "PickDeliverBoth='P'  or PickDeliverBoth='B'")));
+                results.Add("DeliveryAvgUtilization", Convert.ToDouble(table.Compute("Avg(DeliveryUtilization)", "PickDeliverBoth='D'  or PickDeliverBoth='B'")));
+                results.Add("TotalPickupItems", Convert.ToDouble(table.Compute("Sum(PiecesPicked)", "PickDeliverBoth='P'  or PickDeliverBoth='B'")));
+                results.Add("TotalDeliveryItems", Convert.ToDouble(table.Compute("Sum(PiecesDelivered)", "PickDeliverBoth='D'  or PickDeliverBoth='B'")));
+                results.Add("TotalScheduledPickups", Convert.ToDouble(table.Compute("Count(Building)", "(PickDeliverBoth='P' or PickDeliverBoth='B') and OnDemand='N'")));
+                results.Add("TotalScheduledDelivery", Convert.ToDouble(table.Compute("Count(Building)", "(PickDeliverBoth='D' or PickDeliverBoth='B') and OnDemand='N'")));
+                results.Add("OnTimePickupPercentage", results["TotalScheduledPickups"] / results["TotalOnTimeScheduledPickTrips"]);
+                results.Add("OnTimeDeliveryPercentage", results["TotalScheduledDelivery"] / results["TotalOnTimeScheduledDeliverTrips"]);
 
-            results.Add("TotalTrips", table.Rows.Count);
-            results.Add("TotalScheduledTrips", Convert.ToDouble(table.Compute("Count(OnDemand)", "OnDemand='N' or OnDemand=''")));
+                
+            }
+            else
+            {
+                results.Add("TotalTrips", 0.0);
+                results.Add("TotalScheduledTrips", 0.0);
+                results.Add("TotalPickTrips", 0.0);
+                results.Add("TotalDeliverTrips", 0.0);
+                results.Add("TotalOnTimeScheduledTrips", 0.0);
+                results.Add("TotalOnTimeScheduledPickTrips", 0.0);
+                results.Add("TotalOnTimeScheduledDeliverTrips", 0.0);
+                results.Add("TotalOffTimeScheduledTrips", 0.0);
+                results.Add("TotalOffTimeScheduledPickTrips", 0.0);
+                results.Add("TotalOffTimeScheduledDeliverTrips", 0.0);
+                results.Add("PickupAvgUtilization", 0.0);
+                results.Add("DeliveryAvgUtilization", 0.0);
+                results.Add("TotalPickupItems", 0.0);
+                results.Add("TotalDeliveryItems", 0.0);
+                results.Add("TotalScheduledPickups", 0.0);
+                results.Add("TotalScheduledDelivery", 0.0);
+                results.Add("OnTimePickupPercentage", 0.0);
+                results.Add("OnTimeDeliveryPercentage", 0.0);
 
+                
+
+            }
             return results;
         }
 

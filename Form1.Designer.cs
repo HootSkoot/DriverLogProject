@@ -29,10 +29,10 @@ namespace DriverLogProject
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.actionsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAddVehicle = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,6 +42,22 @@ namespace DriverLogProject
             this.VehicleList = new System.Windows.Forms.ComboBox();
             this.activateVehicle = new System.Windows.Forms.Button();
             this.driverLogTable = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VehicleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Building = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OnDemand = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.PickDeliverBoth = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.OnTime = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ArriveTime = new DriverLogProject.DriverDatabaseForm.CalendarColumn();
+            this.ArriveActualDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ArriveActualTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DepartTime = new DriverLogProject.DriverDatabaseForm.CalendarColumn();
+            this.PiecesPicked = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PickupUtilization = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PiecesDelivered = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DeliveryUtilization = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VehicleDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.selectDateButton = new System.Windows.Forms.Button();
             this.logDataButton = new System.Windows.Forms.Button();
@@ -77,30 +93,18 @@ namespace DriverLogProject
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.dataBox13 = new System.Windows.Forms.TextBox();
             this.dataBox14 = new System.Windows.Forms.TextBox();
             this.dataBox15 = new System.Windows.Forms.TextBox();
             this.dataBox16 = new System.Windows.Forms.TextBox();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VehicleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Building = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OnDemand = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.PickDeliverBoth = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.OnTime = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ArriveTime = new DriverLogProject.DriverDatabaseForm.CalendarColumn();
-            this.ArriveActualDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ArriveActualTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DepartTime = new DriverLogProject.DriverDatabaseForm.CalendarColumn();
-            this.PiecesPicked = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PickupUtilization = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PiecesDelivered = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DeliveryUtilization = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VehicleDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataBox17 = new System.Windows.Forms.TextBox();
+            this.dataBox18 = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -118,7 +122,7 @@ namespace DriverLogProject
             this.actionsMenu});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1180, 33);
+            this.menuStrip1.Size = new System.Drawing.Size(1180, 36);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -127,7 +131,7 @@ namespace DriverLogProject
             this.actionsMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuAddVehicle});
             this.actionsMenu.Name = "actionsMenu";
-            this.actionsMenu.Size = new System.Drawing.Size(87, 29);
+            this.actionsMenu.Size = new System.Drawing.Size(87, 30);
             this.actionsMenu.Text = "Actions";
             // 
             // menuAddVehicle
@@ -142,10 +146,10 @@ namespace DriverLogProject
             this.tabControl.Controls.Add(this.tabPage1);
             this.tabControl.Controls.Add(this.tabPage2);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl.Location = new System.Drawing.Point(0, 33);
+            this.tabControl.Location = new System.Drawing.Point(0, 36);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1180, 502);
+            this.tabControl.Size = new System.Drawing.Size(1180, 499);
             this.tabControl.TabIndex = 0;
             // 
             // tabPage1
@@ -153,7 +157,7 @@ namespace DriverLogProject
             this.tabPage1.Controls.Add(this.tabPage1TablePanel);
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1172, 469);
+            this.tabPage1.Size = new System.Drawing.Size(1172, 466);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Vehicle Handler";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -183,7 +187,7 @@ namespace DriverLogProject
             this.tabPage1TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 11F));
             this.tabPage1TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tabPage1TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tabPage1TablePanel.Size = new System.Drawing.Size(1172, 469);
+            this.tabPage1TablePanel.Size = new System.Drawing.Size(1172, 466);
             this.tabPage1TablePanel.TabIndex = 3;
             // 
             // VehicleList
@@ -237,8 +241,168 @@ namespace DriverLogProject
             this.driverLogTable.RowHeadersVisible = false;
             this.driverLogTable.RowHeadersWidth = 62;
             this.driverLogTable.RowTemplate.Height = 28;
-            this.driverLogTable.Size = new System.Drawing.Size(1166, 382);
+            this.driverLogTable.Size = new System.Drawing.Size(1166, 379);
             this.driverLogTable.TabIndex = 3;
+            this.driverLogTable.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.driverLogTable_DefaultValuesNeeded);
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            this.id.HeaderText = "id";
+            this.id.MinimumWidth = 8;
+            this.id.Name = "id";
+            this.id.Visible = false;
+            this.id.Width = 50;
+            // 
+            // VehicleName
+            // 
+            this.VehicleName.HeaderText = "Vehicle Name";
+            this.VehicleName.MinimumWidth = 8;
+            this.VehicleName.Name = "VehicleName";
+            this.VehicleName.Visible = false;
+            this.VehicleName.Width = 50;
+            // 
+            // Building
+            // 
+            this.Building.DataPropertyName = "Building";
+            this.Building.HeaderText = "Building";
+            this.Building.MinimumWidth = 8;
+            this.Building.Name = "Building";
+            this.Building.Width = 50;
+            // 
+            // OnDemand
+            // 
+            this.OnDemand.DataPropertyName = "OnDemand";
+            this.OnDemand.HeaderText = "On-Demand";
+            this.OnDemand.Items.AddRange(new object[] {
+            "N",
+            "Y"});
+            this.OnDemand.MinimumWidth = 8;
+            this.OnDemand.Name = "OnDemand";
+            this.OnDemand.Width = 70;
+            // 
+            // PickDeliverBoth
+            // 
+            this.PickDeliverBoth.DataPropertyName = "PickDeliverBoth";
+            this.PickDeliverBoth.HeaderText = "Pickup/Delivery/Both";
+            this.PickDeliverBoth.Items.AddRange(new object[] {
+            "",
+            "P",
+            "D",
+            "B"});
+            this.PickDeliverBoth.MinimumWidth = 8;
+            this.PickDeliverBoth.Name = "PickDeliverBoth";
+            this.PickDeliverBoth.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.PickDeliverBoth.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.PickDeliverBoth.Width = 150;
+            // 
+            // OnTime
+            // 
+            this.OnTime.DataPropertyName = "OnTime";
+            this.OnTime.FalseValue = "1";
+            this.OnTime.HeaderText = "On Time?";
+            this.OnTime.IndeterminateValue = "0";
+            this.OnTime.MinimumWidth = 8;
+            this.OnTime.Name = "OnTime";
+            this.OnTime.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.OnTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.OnTime.ThreeState = true;
+            this.OnTime.TrueValue = "2";
+            this.OnTime.Width = 70;
+            // 
+            // ArriveTime
+            // 
+            this.ArriveTime.DataPropertyName = "ArriveTime";
+            dataGridViewCellStyle9.NullValue = null;
+            this.ArriveTime.DefaultCellStyle = dataGridViewCellStyle9;
+            this.ArriveTime.HeaderText = "Arrival Time";
+            this.ArriveTime.MinimumWidth = 8;
+            this.ArriveTime.Name = "ArriveTime";
+            this.ArriveTime.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ArriveTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.ArriveTime.Width = 150;
+            // 
+            // ArriveActualDate
+            // 
+            this.ArriveActualDate.HeaderText = "ArriveActualDate";
+            this.ArriveActualDate.MinimumWidth = 8;
+            this.ArriveActualDate.Name = "ArriveActualDate";
+            this.ArriveActualDate.Visible = false;
+            this.ArriveActualDate.Width = 150;
+            // 
+            // ArriveActualTime
+            // 
+            this.ArriveActualTime.HeaderText = "ArriveActualTime";
+            this.ArriveActualTime.MinimumWidth = 8;
+            this.ArriveActualTime.Name = "ArriveActualTime";
+            this.ArriveActualTime.Visible = false;
+            this.ArriveActualTime.Width = 150;
+            // 
+            // DepartTime
+            // 
+            this.DepartTime.DataPropertyName = "DepartTime";
+            dataGridViewCellStyle10.NullValue = null;
+            this.DepartTime.DefaultCellStyle = dataGridViewCellStyle10;
+            this.DepartTime.HeaderText = "Departure Time";
+            this.DepartTime.MinimumWidth = 8;
+            this.DepartTime.Name = "DepartTime";
+            this.DepartTime.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.DepartTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.DepartTime.Width = 150;
+            // 
+            // PiecesPicked
+            // 
+            this.PiecesPicked.DataPropertyName = "PiecesPicked";
+            this.PiecesPicked.HeaderText = "Pieces Pickedup";
+            this.PiecesPicked.MinimumWidth = 8;
+            this.PiecesPicked.Name = "PiecesPicked";
+            this.PiecesPicked.Width = 60;
+            // 
+            // PickupUtilization
+            // 
+            this.PickupUtilization.DataPropertyName = "PickupUtilization";
+            dataGridViewCellStyle11.Format = "N0";
+            dataGridViewCellStyle11.NullValue = null;
+            this.PickupUtilization.DefaultCellStyle = dataGridViewCellStyle11;
+            this.PickupUtilization.HeaderText = "Pickup Utilization";
+            this.PickupUtilization.MinimumWidth = 8;
+            this.PickupUtilization.Name = "PickupUtilization";
+            this.PickupUtilization.Width = 60;
+            // 
+            // PiecesDelivered
+            // 
+            this.PiecesDelivered.DataPropertyName = "PiecesDelivered";
+            this.PiecesDelivered.HeaderText = "Pieces Delivered";
+            this.PiecesDelivered.MinimumWidth = 8;
+            this.PiecesDelivered.Name = "PiecesDelivered";
+            this.PiecesDelivered.Width = 60;
+            // 
+            // DeliveryUtilization
+            // 
+            this.DeliveryUtilization.DataPropertyName = "DeliveryUtilization";
+            dataGridViewCellStyle12.Format = "N0";
+            this.DeliveryUtilization.DefaultCellStyle = dataGridViewCellStyle12;
+            this.DeliveryUtilization.HeaderText = "Delivery Utilization";
+            this.DeliveryUtilization.MinimumWidth = 8;
+            this.DeliveryUtilization.Name = "DeliveryUtilization";
+            this.DeliveryUtilization.Width = 60;
+            // 
+            // Date
+            // 
+            this.Date.DataPropertyName = "LoggingDate";
+            this.Date.HeaderText = "Date";
+            this.Date.MinimumWidth = 8;
+            this.Date.Name = "Date";
+            this.Date.Visible = false;
+            this.Date.Width = 150;
+            // 
+            // VehicleDate
+            // 
+            this.VehicleDate.HeaderText = "Vehicle Date";
+            this.VehicleDate.MinimumWidth = 8;
+            this.VehicleDate.Name = "VehicleDate";
+            this.VehicleDate.Visible = false;
+            this.VehicleDate.Width = 150;
             // 
             // dateTimePicker1
             // 
@@ -262,7 +426,7 @@ namespace DriverLogProject
             // logDataButton
             // 
             this.logDataButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.logDataButton.Location = new System.Drawing.Point(3, 437);
+            this.logDataButton.Location = new System.Drawing.Point(3, 434);
             this.logDataButton.Name = "logDataButton";
             this.logDataButton.Size = new System.Drawing.Size(189, 29);
             this.logDataButton.TabIndex = 6;
@@ -275,7 +439,7 @@ namespace DriverLogProject
             this.label1.AutoSize = true;
             this.tabPage1TablePanel.SetColumnSpan(this.label1, 3);
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(393, 434);
+            this.label1.Location = new System.Drawing.Point(393, 431);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(579, 35);
             this.label1.TabIndex = 7;
@@ -284,7 +448,7 @@ namespace DriverLogProject
             // updateButton
             // 
             this.updateButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.updateButton.Location = new System.Drawing.Point(198, 437);
+            this.updateButton.Location = new System.Drawing.Point(198, 434);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(189, 29);
             this.updateButton.TabIndex = 8;
@@ -347,6 +511,10 @@ namespace DriverLogProject
             this.tableLayoutPanel1.Controls.Add(this.dataBox14, 4, 3);
             this.tableLayoutPanel1.Controls.Add(this.dataBox15, 4, 4);
             this.tableLayoutPanel1.Controls.Add(this.dataBox16, 4, 5);
+            this.tableLayoutPanel1.Controls.Add(this.dataBox17, 4, 6);
+            this.tableLayoutPanel1.Controls.Add(this.dataBox18, 4, 7);
+            this.tableLayoutPanel1.Controls.Add(this.label18, 5, 6);
+            this.tableLayoutPanel1.Controls.Add(this.label19, 5, 7);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -471,21 +639,21 @@ namespace DriverLogProject
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(588, 243);
+            this.label7.Location = new System.Drawing.Point(588, 233);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(228, 20);
+            this.label7.Size = new System.Drawing.Size(228, 40);
             this.label7.TabIndex = 14;
-            this.label7.Text = "Total Scheduled Pickup Trips";
+            this.label7.Text = "Total On-Time Scheduled Pickup Trips";
             // 
             // label8
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(588, 289);
+            this.label8.Location = new System.Drawing.Point(588, 279);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(228, 20);
+            this.label8.Size = new System.Drawing.Size(228, 40);
             this.label8.TabIndex = 15;
-            this.label8.Text = "Total Scheduled Delivery Trips";
+            this.label8.Text = "Total On-Time Scheduled Delivery Trips";
             // 
             // dataBox6
             // 
@@ -630,16 +798,6 @@ namespace DriverLogProject
             this.label13.TabIndex = 27;
             this.label13.Text = "Utilization of Pickup Trips";
             // 
-            // label14
-            // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(939, 105);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(230, 20);
-            this.label14.TabIndex = 28;
-            this.label14.Text = "Total Picked Up Items";
-            // 
             // label15
             // 
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -649,6 +807,16 @@ namespace DriverLogProject
             this.label15.Size = new System.Drawing.Size(230, 20);
             this.label15.TabIndex = 29;
             this.label15.Text = "Total Delivery Items";
+            // 
+            // label14
+            // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(939, 105);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(230, 20);
+            this.label14.TabIndex = 28;
+            this.label14.Text = "Total Picked Up Items";
             // 
             // label16
             // 
@@ -706,161 +874,43 @@ namespace DriverLogProject
             this.dataBox16.Size = new System.Drawing.Size(111, 26);
             this.dataBox16.TabIndex = 35;
             // 
-            // id
+            // dataBox17
             // 
-            this.id.DataPropertyName = "id";
-            this.id.HeaderText = "id";
-            this.id.MinimumWidth = 8;
-            this.id.Name = "id";
-            this.id.Visible = false;
-            this.id.Width = 50;
+            this.dataBox17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataBox17.Location = new System.Drawing.Point(822, 286);
+            this.dataBox17.Name = "dataBox17";
+            this.dataBox17.ReadOnly = true;
+            this.dataBox17.Size = new System.Drawing.Size(111, 26);
+            this.dataBox17.TabIndex = 36;
             // 
-            // VehicleName
+            // dataBox18
             // 
-            this.VehicleName.HeaderText = "Vehicle Name";
-            this.VehicleName.MinimumWidth = 8;
-            this.VehicleName.Name = "VehicleName";
-            this.VehicleName.Visible = false;
-            this.VehicleName.Width = 50;
+            this.dataBox18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataBox18.Location = new System.Drawing.Point(822, 332);
+            this.dataBox18.Name = "dataBox18";
+            this.dataBox18.ReadOnly = true;
+            this.dataBox18.Size = new System.Drawing.Size(111, 26);
+            this.dataBox18.TabIndex = 37;
             // 
-            // Building
+            // label18
             // 
-            this.Building.DataPropertyName = "Building";
-            this.Building.HeaderText = "Building";
-            this.Building.MinimumWidth = 8;
-            this.Building.Name = "Building";
-            this.Building.Width = 50;
+            this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(939, 289);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(230, 20);
+            this.label18.TabIndex = 38;
+            this.label18.Text = "Total Scheduled Pickup Trips";
             // 
-            // OnDemand
+            // label19
             // 
-            this.OnDemand.DataPropertyName = "OnDemand";
-            this.OnDemand.HeaderText = "On-Demand";
-            this.OnDemand.Items.AddRange(new object[] {
-            "N",
-            "Y"});
-            this.OnDemand.MinimumWidth = 8;
-            this.OnDemand.Name = "OnDemand";
-            this.OnDemand.Width = 70;
-            // 
-            // PickDeliverBoth
-            // 
-            this.PickDeliverBoth.DataPropertyName = "PickDeliverBoth";
-            this.PickDeliverBoth.HeaderText = "Pickup/Delivery/Both";
-            this.PickDeliverBoth.Items.AddRange(new object[] {
-            "",
-            "P",
-            "D",
-            "B"});
-            this.PickDeliverBoth.MinimumWidth = 8;
-            this.PickDeliverBoth.Name = "PickDeliverBoth";
-            this.PickDeliverBoth.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.PickDeliverBoth.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // OnTime
-            // 
-            this.OnTime.DataPropertyName = "OnTime";
-            this.OnTime.FalseValue = "1";
-            this.OnTime.HeaderText = "On Time?";
-            this.OnTime.IndeterminateValue = "0";
-            this.OnTime.MinimumWidth = 8;
-            this.OnTime.Name = "OnTime";
-            this.OnTime.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.OnTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.OnTime.ThreeState = true;
-            this.OnTime.TrueValue = "2";
-            this.OnTime.Width = 70;
-            // 
-            // ArriveTime
-            // 
-            this.ArriveTime.DataPropertyName = "ArriveTime";
-            dataGridViewCellStyle1.NullValue = null;
-            this.ArriveTime.DefaultCellStyle = dataGridViewCellStyle1;
-            this.ArriveTime.HeaderText = "Arrival Time";
-            this.ArriveTime.MinimumWidth = 8;
-            this.ArriveTime.Name = "ArriveTime";
-            this.ArriveTime.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ArriveTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // ArriveActualDate
-            // 
-            this.ArriveActualDate.HeaderText = "ArriveActualDate";
-            this.ArriveActualDate.MinimumWidth = 8;
-            this.ArriveActualDate.Name = "ArriveActualDate";
-            this.ArriveActualDate.Visible = false;
-            this.ArriveActualDate.Width = 150;
-            // 
-            // ArriveActualTime
-            // 
-            this.ArriveActualTime.HeaderText = "ArriveActualTime";
-            this.ArriveActualTime.MinimumWidth = 8;
-            this.ArriveActualTime.Name = "ArriveActualTime";
-            this.ArriveActualTime.Visible = false;
-            this.ArriveActualTime.Width = 150;
-            // 
-            // DepartTime
-            // 
-            this.DepartTime.DataPropertyName = "DepartTime";
-            dataGridViewCellStyle2.NullValue = null;
-            this.DepartTime.DefaultCellStyle = dataGridViewCellStyle2;
-            this.DepartTime.HeaderText = "Departure Time";
-            this.DepartTime.MinimumWidth = 8;
-            this.DepartTime.Name = "DepartTime";
-            this.DepartTime.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DepartTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // PiecesPicked
-            // 
-            this.PiecesPicked.DataPropertyName = "PiecesPicked";
-            this.PiecesPicked.HeaderText = "Pieces Pickedup";
-            this.PiecesPicked.MinimumWidth = 8;
-            this.PiecesPicked.Name = "PiecesPicked";
-            this.PiecesPicked.Width = 60;
-            // 
-            // PickupUtilization
-            // 
-            this.PickupUtilization.DataPropertyName = "PickupUtilization";
-            dataGridViewCellStyle3.Format = "N0";
-            dataGridViewCellStyle3.NullValue = null;
-            this.PickupUtilization.DefaultCellStyle = dataGridViewCellStyle3;
-            this.PickupUtilization.HeaderText = "Pickup Utilization";
-            this.PickupUtilization.MinimumWidth = 8;
-            this.PickupUtilization.Name = "PickupUtilization";
-            this.PickupUtilization.Width = 60;
-            // 
-            // PiecesDelivered
-            // 
-            this.PiecesDelivered.DataPropertyName = "PiecesDelivered";
-            this.PiecesDelivered.HeaderText = "Pieces Delivered";
-            this.PiecesDelivered.MinimumWidth = 8;
-            this.PiecesDelivered.Name = "PiecesDelivered";
-            this.PiecesDelivered.Width = 60;
-            // 
-            // DeliveryUtilization
-            // 
-            this.DeliveryUtilization.DataPropertyName = "DeliveryUtilization";
-            dataGridViewCellStyle4.Format = "N0";
-            this.DeliveryUtilization.DefaultCellStyle = dataGridViewCellStyle4;
-            this.DeliveryUtilization.HeaderText = "Delivery Utilization";
-            this.DeliveryUtilization.MinimumWidth = 8;
-            this.DeliveryUtilization.Name = "DeliveryUtilization";
-            this.DeliveryUtilization.Width = 60;
-            // 
-            // Date
-            // 
-            this.Date.DataPropertyName = "LoggingDate";
-            this.Date.HeaderText = "Date";
-            this.Date.MinimumWidth = 8;
-            this.Date.Name = "Date";
-            this.Date.Visible = false;
-            this.Date.Width = 150;
-            // 
-            // VehicleDate
-            // 
-            this.VehicleDate.HeaderText = "Vehicle Date";
-            this.VehicleDate.MinimumWidth = 8;
-            this.VehicleDate.Name = "VehicleDate";
-            this.VehicleDate.Visible = false;
-            this.VehicleDate.Width = 150;
+            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(939, 335);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(230, 20);
+            this.label19.TabIndex = 39;
+            this.label19.Text = "Total Scheduled Delivery Trips";
             // 
             // DriverDatabaseForm
             // 
@@ -958,6 +1008,10 @@ namespace DriverLogProject
         private System.Windows.Forms.DataGridViewTextBoxColumn DeliveryUtilization;
         private System.Windows.Forms.DataGridViewTextBoxColumn Date;
         private System.Windows.Forms.DataGridViewTextBoxColumn VehicleDate;
+        private System.Windows.Forms.TextBox dataBox17;
+        private System.Windows.Forms.TextBox dataBox18;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
     }
 }
 
