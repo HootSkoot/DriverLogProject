@@ -24,6 +24,7 @@ namespace DriverLogProject
         //private string db = ".\\DriverDatabase.db";
         private string db = "DriverDatabaseConsolidated.db";
         private string vehicleTable = "VehicleSchedule";
+        private string scheduleTable = "ScheduleTable";
         private VehicleHandler handler;
         public DriverDatabaseForm()
         {
@@ -55,6 +56,7 @@ namespace DriverLogProject
 
             driverLogTable.Columns["ArriveTime"].DefaultCellStyle.Format = "t";
             driverLogTable.Columns["DepartTime"].DefaultCellStyle.Format = "t";
+            scheduleGrid.Columns["Time"].DefaultCellStyle.Format = "t";
 
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker1.CustomFormat = "MMMM dd, yyyy";
@@ -92,8 +94,11 @@ namespace DriverLogProject
             if (driverLogTable.Rows.Count > 1 || driverLogTable.Rows[0].Cells["Building"].Value == null)
             {
                 driverLogTable.Rows.Clear();
+                
             }
         }
+
+
 
         private void MenuAddVehicle_Click(object sender, EventArgs e)
         {
@@ -115,9 +120,11 @@ namespace DriverLogProject
                 MessageBox.Show("Invalid Truck Name");
             }
 
-            VehicleHandler handler = new VehicleHandler(vehicleTable, db);
-            handler.CreateVehicleTable();
-            
+            VehicleHandler handler1 = new VehicleHandler(vehicleTable, db);
+            handler1.CreateVehicleTable();
+            VehicleHandler handler2 = new VehicleHandler(scheduleTable, db);
+            handler2.CreateScheduleTable();
+
         }
 
         //Invoke this whenever the vehicle selection is changed
@@ -145,6 +152,7 @@ namespace DriverLogProject
 
         private void VehicleList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            scheduleGrid.Rows.Clear();
             ClearVehicleTable();
             DisableTabControls();
             handler = null;
@@ -157,7 +165,15 @@ namespace DriverLogProject
             {
                 EnableTabControls();
                 //VehicleHandler handler = new VehicleHandler(VehicleList.SelectedItem.ToString(), db);
+                handler = new VehicleHandler(scheduleTable, db);
 
+                scheduleGrid.Rows.Clear();
+
+                foreach (DataRow row in handler.RerieveScheduleTable(VehicleList.SelectedItem.ToString()).Rows)
+                {
+                    scheduleGrid.Rows.Add(row["ScheduleID"], row["ScheduleVehicleName"], row["ScheduleBuilding"], DateTime.Parse(row["Time"].ToString()));
+
+                }
             }
                 
         }
@@ -180,7 +196,7 @@ namespace DriverLogProject
 
                 foreach (DataGridViewRow row in driverLogTable.Rows)
                 {
-                    if (row.Cells["Building"].Value != null && row.Cells["Building"].Value.ToString().Length > 1)
+                    if (row.Cells["Building"].Value != null && row.Cells["Building"].Value.ToString().Length >= 1)
                     {
                         driverTableItems = new List<object>();
 
@@ -221,7 +237,7 @@ namespace DriverLogProject
             
             foreach (DataRow row in handler.RetrieveDriverData(dateTimePicker1.Value.ToString("yyyy-MM-dd"),VehicleList.SelectedItem.ToString()).Rows)
             {
-                driverLogTable.Rows.Add(row["id"], row["VehicleName"], row["Building"], row["OnDemand"], row["PickDeliverBoth"], row["OnTime"],DateTime.Parse(row["ArriveTime"].ToString()), row["ArriveActualDate"], row["ArriveActualTime"], DateTime.Parse(row["DepartTime"].ToString()), row["PiecesPicked"], row["PickupUtilization"], row["PiecesDelivered"], row["DeliveryUtilization"], row["LoggingDate"]);
+                driverLogTable.Rows.Add(row["id"], row["VehicleName"], row["Building"].ToString(), row["OnDemand"], row["PickDeliverBoth"], row["OnTime"],DateTime.Parse(row["ArriveTime"].ToString()), row["ArriveActualDate"], row["ArriveActualTime"], DateTime.Parse(row["DepartTime"].ToString()), row["PiecesPicked"], row["PickupUtilization"], row["PiecesDelivered"], row["DeliveryUtilization"], row["LoggingDate"]);
                 
             }
 
@@ -250,7 +266,7 @@ namespace DriverLogProject
 
                         driverTableItems.Add(row.Cells["id"].Value);
                         driverTableItems.Add(row.Cells["VehicleName"].Value);
-                        driverTableItems.Add(row.Cells["Building"].Value);
+                        driverTableItems.Add(row.Cells["Building"].Value.ToString());
                         driverTableItems.Add(row.Cells["OnDemand"].Value);
                         driverTableItems.Add(row.Cells["PickDeliverBoth"].Value);
                         driverTableItems.Add(row.Cells["OnTime"].Value ?? 0);
@@ -564,7 +580,37 @@ namespace DriverLogProject
             e.Row.Cells["DeliveryUtilization"].Value = 0;
         }
 
-        
+        private void saveScheduleButton_Click(object sender, EventArgs e)
+        {
+            handler = new VehicleHandler(scheduleTable, db);
+            if (scheduleGrid.Rows.Count > 0)
+            {
+                var scheduleTableItems = new List<object>();
+                Dictionary<string, List<object>> rowDict = new Dictionary<string, List<object>>();
+
+                int count = 1;
+
+                foreach (DataGridViewRow row in scheduleGrid.Rows)
+                {
+                    if (row.Cells["ScheduleBuilding"].Value != null && row.Cells["ScheduleBuilding"].Value.ToString().Length > 1)
+                    {
+                        scheduleTableItems = new List<object>();
+                        scheduleTableItems.Add(row.Cells["ScheduleID"].Value is null ? DBNull.Value : row.Cells["ScheduleID"].Value);
+                        scheduleTableItems.Add(VehicleList.SelectedItem.ToString());
+                        scheduleTableItems.Add(row.Cells["ScheduleBuilding"].Value.ToString());
+                        scheduleTableItems.Add((DateTime)row.Cells["Time"].Value);
+
+                        rowDict.Add("row" + count, scheduleTableItems);
+                        count++;
+                    }
+
+                }
+
+                handler.InsertOrUpdateScheduleData(rowDict);
+            }
+        }
+
+
 
 
         //

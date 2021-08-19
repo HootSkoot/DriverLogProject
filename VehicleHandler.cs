@@ -30,6 +30,41 @@ namespace DriverLogProject
             helper.DBActionNoParams($"CREATE TABLE IF NOT EXISTS '{name}' (id INTEGER NOT NULL UNIQUE PRIMARY KEY AUTOINCREMENT, VehicleName TEXT, Building TEXT, OnDemand TEXT, PickDeliverBoth TEXT, OnTime TEXT, ArriveTime TEXT, ArriveActualDate TEXT, ArriveActualTime TEXT, DepartTime TEXT, PiecesPicked INTEGER, PickupUtilization INTEGER, PiecesDelivered INTEGER, DeliveryUtilization INTEGER, LoggingDate TEXT)");
         }
 
+        public void CreateScheduleTable()
+        {
+            helper = new SQLiteHelper(db);
+            helper.DBActionNoParams($"CREATE TABLE IF NOT EXISTS '{name}' (ScheduleID INTEGER NOT NULL UNIQUE PRIMARY KEY AUTOINCREMENT, ScheduleVehicleName TEXT, ScheduleBuilding TEXT, Time TEXT)");
+        }
+
+        public void InsertOrUpdateScheduleData(Dictionary<string, List<object>> scheduleDict)
+        {
+            helper = new SQLiteHelper(db);
+            string insertCommand = $"INSERT INTO '{name}' (ScheduleID, ScheduleVehicleName, ScheduleBuilding, Time) VALUES ";
+            List<object> list = new List<object>();
+            int count = 1;
+            int p = 1;
+            if (scheduleDict.Count == 1)
+            {
+                insertCommand += BuildParameterQueryString(scheduleDict["row1"], ref count);
+                insertCommand += " ON CONFLICT (ScheduleID) DO UPDATE SET Time=excluded.Time";
+                helper.DBActionWithParams(insertCommand, scheduleDict["row1"]);
+            }
+            else if (scheduleDict.Count > 1)
+            {
+
+                while (count < scheduleDict.Count)
+                {
+                    insertCommand += BuildParameterQueryStringMultiple(scheduleDict["row" + count], ref p);
+                    list.AddRange(scheduleDict["row" + count]);
+                    count++;
+                }
+                insertCommand += BuildParameterQueryString(scheduleDict["row" + count], ref p);
+                list.AddRange(scheduleDict["row" + count]);
+                insertCommand += " ON CONFLICT (ScheduleID) DO UPDATE SET Time=excluded.Time";
+                helper.DBActionWithParams(insertCommand, list);
+            }
+        }
+
         public void InsertDriverData(Dictionary<string, List<object>> driverDict, string insertCommand)
         {
             helper = new SQLiteHelper(db);
@@ -85,6 +120,17 @@ namespace DriverLogProject
             
         }
 
+        public DataTable RerieveScheduleTable(string vehicleName)
+        {
+            DataTable table = new DataTable();
+
+            helper = new SQLiteHelper(db);
+            string selectCommand = $"SELECT ScheduleID, ScheduleVehicleName, ScheduleBuilding, Time FROM '{name}' WHERE ScheduleVehicleName=@param1";
+            List<object> list = new List<object>();
+            list.Add(vehicleName);
+            return helper.DBDataTableReturnWithParams(selectCommand, list);
+        }
+
         public Dictionary<string,double> QuerySummarizer(List<string> vehicleList, string startDate, string endDate)
         {
             Dictionary<string,double> results = new Dictionary<string, double>();
@@ -102,14 +148,14 @@ namespace DriverLogProject
                 results.Add("TotalOffTimeScheduledTrips", Convert.ToDouble(table.Compute("Count(Building)", "(OnDemand='N' or OnDemand='') and OnTime=1")));
                 results.Add("TotalOffTimeScheduledPickTrips", Convert.ToDouble(table.Compute("Count(Building)", "(OnDemand='N' or OnDemand='') and OnTime=1 and (PickDeliverBoth='P' or PickDeliverBoth='B')")));
                 results.Add("TotalOffTimeScheduledDeliverTrips", Convert.ToDouble(table.Compute("Count(Building)", "(OnDemand='N' or OnDemand='') and OnTime=1 and PickDeliverBoth='D'  or PickDeliverBoth='B'")));
-                results.Add("PickupAvgUtilization", Convert.ToDouble(table.Compute("Avg(PickupUtilization)", "PickDeliverBoth='P'  or PickDeliverBoth='B'")));
-                results.Add("DeliveryAvgUtilization", Convert.ToDouble(table.Compute("Avg(DeliveryUtilization)", "PickDeliverBoth='D'  or PickDeliverBoth='B'")));
-                results.Add("TotalPickupItems", Convert.ToDouble(table.Compute("Sum(PiecesPicked)", "PickDeliverBoth='P'  or PickDeliverBoth='B'")));
-                results.Add("TotalDeliveryItems", Convert.ToDouble(table.Compute("Sum(PiecesDelivered)", "PickDeliverBoth='D'  or PickDeliverBoth='B'")));
+                results.Add("PickupAvgUtilization", Convert.ToDouble(table.Compute("Avg(PickupUtilization)", "PickDeliverBoth='P'  or PickDeliverBoth='B'").GetType()==typeof(DBNull) ? "0.0" : table.Compute("Avg(PickupUtilization)", "PickDeliverBoth='P'  or PickDeliverBoth='B'")));
+                results.Add("DeliveryAvgUtilization", Convert.ToDouble(table.Compute("Avg(DeliveryUtilization)", "PickDeliverBoth='D'  or PickDeliverBoth='B'").GetType() == typeof(DBNull) ? "0.0" : table.Compute("Avg(DeliveryUtilization)", "PickDeliverBoth='D'  or PickDeliverBoth='B'")));
+                results.Add("TotalPickupItems", Convert.ToDouble(table.Compute("Sum(PiecesPicked)", "PickDeliverBoth='P'  or PickDeliverBoth='B'").GetType() == typeof(DBNull) ? "0.0" : table.Compute("Sum(PiecesPicked)", "PickDeliverBoth='P'  or PickDeliverBoth='B'")));
+                results.Add("TotalDeliveryItems", Convert.ToDouble(table.Compute("Sum(PiecesDelivered)", "PickDeliverBoth='D'  or PickDeliverBoth='B'").GetType() == typeof(DBNull) ? "0.0" : table.Compute("Sum(PiecesDelivered)", "PickDeliverBoth='D'  or PickDeliverBoth='B'")));
                 results.Add("TotalScheduledPickups", Convert.ToDouble(table.Compute("Count(Building)", "(PickDeliverBoth='P' or PickDeliverBoth='B') and OnDemand='N'")));
                 results.Add("TotalScheduledDelivery", Convert.ToDouble(table.Compute("Count(Building)", "(PickDeliverBoth='D' or PickDeliverBoth='B') and OnDemand='N'")));
-                results.Add("OnTimePickupPercentage", results["TotalScheduledPickups"] / results["TotalOnTimeScheduledPickTrips"]);
-                results.Add("OnTimeDeliveryPercentage", results["TotalScheduledDelivery"] / results["TotalOnTimeScheduledDeliverTrips"]);
+                results.Add("OnTimePickupPercentage",  (double)results["TotalOnTimeScheduledPickTrips"] / results["TotalScheduledPickups"]);
+                results.Add("OnTimeDeliveryPercentage",  (double)results["TotalOnTimeScheduledDeliverTrips"] / results["TotalScheduledDelivery"]);
 
                 
             }
@@ -153,7 +199,7 @@ namespace DriverLogProject
             int count = 1;
             foreach (string item in vehicleList)
             {
-                query += "VehicleName=@param" + count + (count==vehicleList.Count ? "" : " and ");
+                query += "VehicleName=@param" + count + (count==vehicleList.Count ? "" : " or ");
                 count++;
                 list.Add(item);
             }

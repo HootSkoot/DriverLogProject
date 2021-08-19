@@ -29,10 +29,10 @@ namespace DriverLogProject
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.actionsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAddVehicle = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,6 +63,12 @@ namespace DriverLogProject
             this.logDataButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.updateButton = new System.Windows.Forms.Button();
+            this.scheduleGrid = new System.Windows.Forms.DataGridView();
+            this.ScheduleID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ScheduleVehicleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ScheduleBuilding = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Time = new DriverLogProject.DriverDatabaseForm.CalendarColumn();
+            this.saveScheduleButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.VehicleSumList = new System.Windows.Forms.CheckedListBox();
@@ -110,6 +116,7 @@ namespace DriverLogProject
             this.tabPage1.SuspendLayout();
             this.tabPage1TablePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.driverLogTable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scheduleGrid)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -122,7 +129,7 @@ namespace DriverLogProject
             this.actionsMenu});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1180, 36);
+            this.menuStrip1.Size = new System.Drawing.Size(1474, 33);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -131,7 +138,7 @@ namespace DriverLogProject
             this.actionsMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuAddVehicle});
             this.actionsMenu.Name = "actionsMenu";
-            this.actionsMenu.Size = new System.Drawing.Size(87, 30);
+            this.actionsMenu.Size = new System.Drawing.Size(87, 29);
             this.actionsMenu.Text = "Actions";
             // 
             // menuAddVehicle
@@ -146,10 +153,10 @@ namespace DriverLogProject
             this.tabControl.Controls.Add(this.tabPage1);
             this.tabControl.Controls.Add(this.tabPage2);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl.Location = new System.Drawing.Point(0, 36);
+            this.tabControl.Location = new System.Drawing.Point(0, 33);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1180, 499);
+            this.tabControl.Size = new System.Drawing.Size(1474, 502);
             this.tabControl.TabIndex = 0;
             // 
             // tabPage1
@@ -157,20 +164,22 @@ namespace DriverLogProject
             this.tabPage1.Controls.Add(this.tabPage1TablePanel);
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1172, 466);
+            this.tabPage1.Size = new System.Drawing.Size(1466, 469);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Vehicle Handler";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage1TablePanel
             // 
-            this.tabPage1TablePanel.ColumnCount = 6;
-            this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tabPage1TablePanel.ColumnCount = 8;
+            this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28572F));
+            this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28572F));
+            this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28572F));
+            this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28572F));
+            this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28572F));
+            this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28572F));
             this.tabPage1TablePanel.Controls.Add(this.VehicleList, 0, 0);
             this.tabPage1TablePanel.Controls.Add(this.activateVehicle, 1, 0);
             this.tabPage1TablePanel.Controls.Add(this.driverLogTable, 0, 2);
@@ -179,6 +188,8 @@ namespace DriverLogProject
             this.tabPage1TablePanel.Controls.Add(this.logDataButton, 0, 3);
             this.tabPage1TablePanel.Controls.Add(this.label1, 2, 3);
             this.tabPage1TablePanel.Controls.Add(this.updateButton, 1, 3);
+            this.tabPage1TablePanel.Controls.Add(this.scheduleGrid, 7, 2);
+            this.tabPage1TablePanel.Controls.Add(this.saveScheduleButton, 7, 3);
             this.tabPage1TablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabPage1TablePanel.Location = new System.Drawing.Point(0, 0);
             this.tabPage1TablePanel.Name = "tabPage1TablePanel";
@@ -187,7 +198,7 @@ namespace DriverLogProject
             this.tabPage1TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 11F));
             this.tabPage1TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tabPage1TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tabPage1TablePanel.Size = new System.Drawing.Size(1172, 466);
+            this.tabPage1TablePanel.Size = new System.Drawing.Size(1466, 469);
             this.tabPage1TablePanel.TabIndex = 3;
             // 
             // VehicleList
@@ -197,16 +208,16 @@ namespace DriverLogProject
             this.VehicleList.FormattingEnabled = true;
             this.VehicleList.Location = new System.Drawing.Point(3, 3);
             this.VehicleList.Name = "VehicleList";
-            this.VehicleList.Size = new System.Drawing.Size(189, 28);
+            this.VehicleList.Size = new System.Drawing.Size(201, 28);
             this.VehicleList.TabIndex = 1;
             this.VehicleList.SelectedIndexChanged += new System.EventHandler(this.VehicleList_SelectedIndexChanged);
             // 
             // activateVehicle
             // 
             this.activateVehicle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.activateVehicle.Location = new System.Drawing.Point(198, 3);
+            this.activateVehicle.Location = new System.Drawing.Point(210, 3);
             this.activateVehicle.Name = "activateVehicle";
-            this.activateVehicle.Size = new System.Drawing.Size(189, 29);
+            this.activateVehicle.Size = new System.Drawing.Size(202, 29);
             this.activateVehicle.TabIndex = 2;
             this.activateVehicle.Text = "Set Active Vechicle";
             this.activateVehicle.UseVisualStyleBackColor = true;
@@ -233,7 +244,7 @@ namespace DriverLogProject
             this.DeliveryUtilization,
             this.Date,
             this.VehicleDate});
-            this.tabPage1TablePanel.SetColumnSpan(this.driverLogTable, 10);
+            this.tabPage1TablePanel.SetColumnSpan(this.driverLogTable, 6);
             this.driverLogTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.driverLogTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.driverLogTable.Location = new System.Drawing.Point(3, 49);
@@ -241,7 +252,7 @@ namespace DriverLogProject
             this.driverLogTable.RowHeadersVisible = false;
             this.driverLogTable.RowHeadersWidth = 62;
             this.driverLogTable.RowTemplate.Height = 28;
-            this.driverLogTable.Size = new System.Drawing.Size(1166, 379);
+            this.driverLogTable.Size = new System.Drawing.Size(1241, 382);
             this.driverLogTable.TabIndex = 3;
             this.driverLogTable.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.driverLogTable_DefaultValuesNeeded);
             // 
@@ -313,8 +324,8 @@ namespace DriverLogProject
             // ArriveTime
             // 
             this.ArriveTime.DataPropertyName = "ArriveTime";
-            dataGridViewCellStyle9.NullValue = null;
-            this.ArriveTime.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.NullValue = null;
+            this.ArriveTime.DefaultCellStyle = dataGridViewCellStyle1;
             this.ArriveTime.HeaderText = "Arrival Time";
             this.ArriveTime.MinimumWidth = 8;
             this.ArriveTime.Name = "ArriveTime";
@@ -341,8 +352,8 @@ namespace DriverLogProject
             // DepartTime
             // 
             this.DepartTime.DataPropertyName = "DepartTime";
-            dataGridViewCellStyle10.NullValue = null;
-            this.DepartTime.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.NullValue = null;
+            this.DepartTime.DefaultCellStyle = dataGridViewCellStyle2;
             this.DepartTime.HeaderText = "Departure Time";
             this.DepartTime.MinimumWidth = 8;
             this.DepartTime.Name = "DepartTime";
@@ -361,9 +372,9 @@ namespace DriverLogProject
             // PickupUtilization
             // 
             this.PickupUtilization.DataPropertyName = "PickupUtilization";
-            dataGridViewCellStyle11.Format = "N0";
-            dataGridViewCellStyle11.NullValue = null;
-            this.PickupUtilization.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle3.Format = "N0";
+            dataGridViewCellStyle3.NullValue = null;
+            this.PickupUtilization.DefaultCellStyle = dataGridViewCellStyle3;
             this.PickupUtilization.HeaderText = "Pickup Utilization";
             this.PickupUtilization.MinimumWidth = 8;
             this.PickupUtilization.Name = "PickupUtilization";
@@ -380,8 +391,8 @@ namespace DriverLogProject
             // DeliveryUtilization
             // 
             this.DeliveryUtilization.DataPropertyName = "DeliveryUtilization";
-            dataGridViewCellStyle12.Format = "N0";
-            this.DeliveryUtilization.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle4.Format = "N0";
+            this.DeliveryUtilization.DefaultCellStyle = dataGridViewCellStyle4;
             this.DeliveryUtilization.HeaderText = "Delivery Utilization";
             this.DeliveryUtilization.MinimumWidth = 8;
             this.DeliveryUtilization.Name = "DeliveryUtilization";
@@ -407,17 +418,17 @@ namespace DriverLogProject
             // dateTimePicker1
             // 
             this.dateTimePicker1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dateTimePicker1.Location = new System.Drawing.Point(588, 3);
+            this.dateTimePicker1.Location = new System.Drawing.Point(626, 3);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(189, 26);
+            this.dateTimePicker1.Size = new System.Drawing.Size(202, 26);
             this.dateTimePicker1.TabIndex = 4;
             // 
             // selectDateButton
             // 
             this.selectDateButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.selectDateButton.Location = new System.Drawing.Point(783, 3);
+            this.selectDateButton.Location = new System.Drawing.Point(834, 3);
             this.selectDateButton.Name = "selectDateButton";
-            this.selectDateButton.Size = new System.Drawing.Size(189, 29);
+            this.selectDateButton.Size = new System.Drawing.Size(202, 29);
             this.selectDateButton.TabIndex = 5;
             this.selectDateButton.Text = "Select Date";
             this.selectDateButton.UseVisualStyleBackColor = true;
@@ -426,9 +437,9 @@ namespace DriverLogProject
             // logDataButton
             // 
             this.logDataButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.logDataButton.Location = new System.Drawing.Point(3, 434);
+            this.logDataButton.Location = new System.Drawing.Point(3, 437);
             this.logDataButton.Name = "logDataButton";
-            this.logDataButton.Size = new System.Drawing.Size(189, 29);
+            this.logDataButton.Size = new System.Drawing.Size(201, 29);
             this.logDataButton.TabIndex = 6;
             this.logDataButton.Text = "Log Data";
             this.logDataButton.UseVisualStyleBackColor = true;
@@ -439,29 +450,89 @@ namespace DriverLogProject
             this.label1.AutoSize = true;
             this.tabPage1TablePanel.SetColumnSpan(this.label1, 3);
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(393, 431);
+            this.label1.Location = new System.Drawing.Point(418, 434);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(579, 35);
+            this.label1.Size = new System.Drawing.Size(618, 35);
             this.label1.TabIndex = 7;
             this.label1.Text = "Square: Not Relevant, Empty: Not On Time, Check: On Time";
             // 
             // updateButton
             // 
             this.updateButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.updateButton.Location = new System.Drawing.Point(198, 434);
+            this.updateButton.Location = new System.Drawing.Point(210, 437);
             this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(189, 29);
+            this.updateButton.Size = new System.Drawing.Size(202, 29);
             this.updateButton.TabIndex = 8;
             this.updateButton.Text = "Update Existing";
             this.updateButton.UseVisualStyleBackColor = true;
             this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
+            // 
+            // scheduleGrid
+            // 
+            this.scheduleGrid.AllowUserToDeleteRows = false;
+            this.scheduleGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.scheduleGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ScheduleID,
+            this.ScheduleVehicleName,
+            this.ScheduleBuilding,
+            this.Time});
+            this.scheduleGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scheduleGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.scheduleGrid.Location = new System.Drawing.Point(1260, 49);
+            this.scheduleGrid.Name = "scheduleGrid";
+            this.scheduleGrid.RowHeadersVisible = false;
+            this.scheduleGrid.RowHeadersWidth = 62;
+            this.scheduleGrid.RowTemplate.Height = 28;
+            this.scheduleGrid.Size = new System.Drawing.Size(203, 382);
+            this.scheduleGrid.TabIndex = 9;
+            // 
+            // ScheduleID
+            // 
+            this.ScheduleID.HeaderText = "ScheduleID";
+            this.ScheduleID.MinimumWidth = 8;
+            this.ScheduleID.Name = "ScheduleID";
+            this.ScheduleID.Visible = false;
+            this.ScheduleID.Width = 150;
+            // 
+            // ScheduleVehicleName
+            // 
+            this.ScheduleVehicleName.HeaderText = "Vehicle Name";
+            this.ScheduleVehicleName.MinimumWidth = 8;
+            this.ScheduleVehicleName.Name = "ScheduleVehicleName";
+            this.ScheduleVehicleName.Visible = false;
+            this.ScheduleVehicleName.Width = 150;
+            // 
+            // ScheduleBuilding
+            // 
+            this.ScheduleBuilding.HeaderText = "Scheduled Building";
+            this.ScheduleBuilding.MinimumWidth = 8;
+            this.ScheduleBuilding.Name = "ScheduleBuilding";
+            this.ScheduleBuilding.Width = 50;
+            // 
+            // Time
+            // 
+            this.Time.HeaderText = "Time";
+            this.Time.MinimumWidth = 8;
+            this.Time.Name = "Time";
+            this.Time.Width = 80;
+            // 
+            // saveScheduleButton
+            // 
+            this.saveScheduleButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.saveScheduleButton.Location = new System.Drawing.Point(1260, 437);
+            this.saveScheduleButton.Name = "saveScheduleButton";
+            this.saveScheduleButton.Size = new System.Drawing.Size(203, 29);
+            this.saveScheduleButton.TabIndex = 10;
+            this.saveScheduleButton.Text = "Save Schedule";
+            this.saveScheduleButton.UseVisualStyleBackColor = true;
+            this.saveScheduleButton.Click += new System.EventHandler(this.saveScheduleButton_Click);
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.tableLayoutPanel1);
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1172, 466);
+            this.tabPage2.Size = new System.Drawing.Size(1466, 466);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Summary";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -529,7 +600,7 @@ namespace DriverLogProject
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1172, 466);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1466, 466);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // VehicleSumList
@@ -540,52 +611,52 @@ namespace DriverLogProject
             this.VehicleSumList.Location = new System.Drawing.Point(3, 3);
             this.VehicleSumList.Name = "VehicleSumList";
             this.tableLayoutPanel1.SetRowSpan(this.VehicleSumList, 5);
-            this.VehicleSumList.Size = new System.Drawing.Size(462, 224);
+            this.VehicleSumList.Size = new System.Drawing.Size(580, 224);
             this.VehicleSumList.TabIndex = 0;
             // 
             // dataBox1
             // 
             this.dataBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataBox1.Location = new System.Drawing.Point(471, 10);
+            this.dataBox1.Location = new System.Drawing.Point(589, 10);
             this.dataBox1.Name = "dataBox1";
             this.dataBox1.ReadOnly = true;
-            this.dataBox1.Size = new System.Drawing.Size(111, 26);
+            this.dataBox1.Size = new System.Drawing.Size(140, 26);
             this.dataBox1.TabIndex = 2;
             // 
             // dataBox2
             // 
             this.dataBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataBox2.Location = new System.Drawing.Point(471, 56);
+            this.dataBox2.Location = new System.Drawing.Point(589, 56);
             this.dataBox2.Name = "dataBox2";
             this.dataBox2.ReadOnly = true;
-            this.dataBox2.Size = new System.Drawing.Size(111, 26);
+            this.dataBox2.Size = new System.Drawing.Size(140, 26);
             this.dataBox2.TabIndex = 3;
             // 
             // dataBox3
             // 
             this.dataBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataBox3.Location = new System.Drawing.Point(471, 102);
+            this.dataBox3.Location = new System.Drawing.Point(589, 102);
             this.dataBox3.Name = "dataBox3";
             this.dataBox3.ReadOnly = true;
-            this.dataBox3.Size = new System.Drawing.Size(111, 26);
+            this.dataBox3.Size = new System.Drawing.Size(140, 26);
             this.dataBox3.TabIndex = 4;
             // 
             // dataBox4
             // 
             this.dataBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataBox4.Location = new System.Drawing.Point(471, 148);
+            this.dataBox4.Location = new System.Drawing.Point(589, 148);
             this.dataBox4.Name = "dataBox4";
             this.dataBox4.ReadOnly = true;
-            this.dataBox4.Size = new System.Drawing.Size(111, 26);
+            this.dataBox4.Size = new System.Drawing.Size(140, 26);
             this.dataBox4.TabIndex = 5;
             // 
             // dataBox5
             // 
             this.dataBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataBox5.Location = new System.Drawing.Point(471, 194);
+            this.dataBox5.Location = new System.Drawing.Point(589, 194);
             this.dataBox5.Name = "dataBox5";
             this.dataBox5.ReadOnly = true;
-            this.dataBox5.Size = new System.Drawing.Size(111, 26);
+            this.dataBox5.Size = new System.Drawing.Size(140, 26);
             this.dataBox5.TabIndex = 6;
             // 
             // dataSummaryButton
@@ -593,7 +664,7 @@ namespace DriverLogProject
             this.dataSummaryButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataSummaryButton.Location = new System.Drawing.Point(3, 279);
             this.dataSummaryButton.Name = "dataSummaryButton";
-            this.dataSummaryButton.Size = new System.Drawing.Size(228, 40);
+            this.dataSummaryButton.Size = new System.Drawing.Size(287, 40);
             this.dataSummaryButton.TabIndex = 1;
             this.dataSummaryButton.Text = "Load Summary";
             this.dataSummaryButton.UseVisualStyleBackColor = true;
@@ -604,24 +675,24 @@ namespace DriverLogProject
             this.dateSummary1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dateSummary1.Location = new System.Drawing.Point(3, 233);
             this.dateSummary1.Name = "dateSummary1";
-            this.dateSummary1.Size = new System.Drawing.Size(228, 26);
+            this.dateSummary1.Size = new System.Drawing.Size(287, 26);
             this.dateSummary1.TabIndex = 7;
             // 
             // dateSummary2
             // 
             this.dateSummary2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dateSummary2.Location = new System.Drawing.Point(237, 233);
+            this.dateSummary2.Location = new System.Drawing.Point(296, 233);
             this.dateSummary2.Name = "dateSummary2";
-            this.dateSummary2.Size = new System.Drawing.Size(228, 26);
+            this.dateSummary2.Size = new System.Drawing.Size(287, 26);
             this.dateSummary2.TabIndex = 8;
             // 
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(588, 13);
+            this.label2.Location = new System.Drawing.Point(735, 13);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(228, 20);
+            this.label2.Size = new System.Drawing.Size(287, 20);
             this.label2.TabIndex = 9;
             this.label2.Text = "Total of all Trip types";
             // 
@@ -629,9 +700,9 @@ namespace DriverLogProject
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(588, 59);
+            this.label3.Location = new System.Drawing.Point(735, 59);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(228, 20);
+            this.label3.Size = new System.Drawing.Size(287, 20);
             this.label3.TabIndex = 10;
             this.label3.Text = "Total Scheduled Trips";
             // 
@@ -639,9 +710,9 @@ namespace DriverLogProject
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(588, 233);
+            this.label7.Location = new System.Drawing.Point(735, 243);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(228, 40);
+            this.label7.Size = new System.Drawing.Size(287, 20);
             this.label7.TabIndex = 14;
             this.label7.Text = "Total On-Time Scheduled Pickup Trips";
             // 
@@ -649,82 +720,82 @@ namespace DriverLogProject
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(588, 279);
+            this.label8.Location = new System.Drawing.Point(735, 289);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(228, 40);
+            this.label8.Size = new System.Drawing.Size(287, 20);
             this.label8.TabIndex = 15;
             this.label8.Text = "Total On-Time Scheduled Delivery Trips";
             // 
             // dataBox6
             // 
             this.dataBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataBox6.Location = new System.Drawing.Point(471, 240);
+            this.dataBox6.Location = new System.Drawing.Point(589, 240);
             this.dataBox6.Name = "dataBox6";
             this.dataBox6.ReadOnly = true;
-            this.dataBox6.Size = new System.Drawing.Size(111, 26);
+            this.dataBox6.Size = new System.Drawing.Size(140, 26);
             this.dataBox6.TabIndex = 16;
             // 
             // dataBox7
             // 
             this.dataBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataBox7.Location = new System.Drawing.Point(471, 286);
+            this.dataBox7.Location = new System.Drawing.Point(589, 286);
             this.dataBox7.Name = "dataBox7";
             this.dataBox7.ReadOnly = true;
-            this.dataBox7.Size = new System.Drawing.Size(111, 26);
+            this.dataBox7.Size = new System.Drawing.Size(140, 26);
             this.dataBox7.TabIndex = 17;
             // 
             // dataBox11
             // 
             this.dataBox11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataBox11.Location = new System.Drawing.Point(822, 10);
+            this.dataBox11.Location = new System.Drawing.Point(1028, 10);
             this.dataBox11.Name = "dataBox11";
             this.dataBox11.ReadOnly = true;
-            this.dataBox11.Size = new System.Drawing.Size(111, 26);
+            this.dataBox11.Size = new System.Drawing.Size(140, 26);
             this.dataBox11.TabIndex = 18;
             // 
             // dataBox12
             // 
             this.dataBox12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataBox12.Location = new System.Drawing.Point(822, 56);
+            this.dataBox12.Location = new System.Drawing.Point(1028, 56);
             this.dataBox12.Name = "dataBox12";
             this.dataBox12.ReadOnly = true;
-            this.dataBox12.Size = new System.Drawing.Size(111, 26);
+            this.dataBox12.Size = new System.Drawing.Size(140, 26);
             this.dataBox12.TabIndex = 19;
             // 
             // dataBox8
             // 
             this.dataBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataBox8.Location = new System.Drawing.Point(471, 332);
+            this.dataBox8.Location = new System.Drawing.Point(589, 332);
             this.dataBox8.Name = "dataBox8";
             this.dataBox8.ReadOnly = true;
-            this.dataBox8.Size = new System.Drawing.Size(111, 26);
+            this.dataBox8.Size = new System.Drawing.Size(140, 26);
             this.dataBox8.TabIndex = 22;
             // 
             // dataBox9
             // 
             this.dataBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataBox9.Location = new System.Drawing.Point(471, 378);
+            this.dataBox9.Location = new System.Drawing.Point(589, 378);
             this.dataBox9.Name = "dataBox9";
             this.dataBox9.ReadOnly = true;
-            this.dataBox9.Size = new System.Drawing.Size(111, 26);
+            this.dataBox9.Size = new System.Drawing.Size(140, 26);
             this.dataBox9.TabIndex = 21;
             // 
             // dataBox10
             // 
             this.dataBox10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataBox10.Location = new System.Drawing.Point(471, 427);
+            this.dataBox10.Location = new System.Drawing.Point(589, 427);
             this.dataBox10.Name = "dataBox10";
             this.dataBox10.ReadOnly = true;
-            this.dataBox10.Size = new System.Drawing.Size(111, 26);
+            this.dataBox10.Size = new System.Drawing.Size(140, 26);
             this.dataBox10.TabIndex = 20;
             // 
             // label5
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(588, 105);
+            this.label5.Location = new System.Drawing.Point(735, 105);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(228, 20);
+            this.label5.Size = new System.Drawing.Size(287, 20);
             this.label5.TabIndex = 12;
             this.label5.Text = "Total Pickup Trips";
             // 
@@ -732,9 +803,9 @@ namespace DriverLogProject
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(588, 151);
+            this.label6.Location = new System.Drawing.Point(735, 151);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(228, 20);
+            this.label6.Size = new System.Drawing.Size(287, 20);
             this.label6.TabIndex = 13;
             this.label6.Text = "Total Delivery Trips";
             // 
@@ -742,9 +813,9 @@ namespace DriverLogProject
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(588, 197);
+            this.label4.Location = new System.Drawing.Point(735, 197);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(228, 20);
+            this.label4.Size = new System.Drawing.Size(287, 20);
             this.label4.TabIndex = 11;
             this.label4.Text = "Total On-Time Scheduled Trips";
             // 
@@ -752,9 +823,9 @@ namespace DriverLogProject
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(588, 325);
+            this.label9.Location = new System.Drawing.Point(735, 335);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(228, 40);
+            this.label9.Size = new System.Drawing.Size(287, 20);
             this.label9.TabIndex = 23;
             this.label9.Text = "Total Late/Early Scheduled Trips";
             // 
@@ -762,9 +833,9 @@ namespace DriverLogProject
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(588, 371);
+            this.label10.Location = new System.Drawing.Point(735, 381);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(228, 40);
+            this.label10.Size = new System.Drawing.Size(287, 20);
             this.label10.TabIndex = 24;
             this.label10.Text = "Total Late/Early Scheduled Pickups";
             // 
@@ -772,9 +843,9 @@ namespace DriverLogProject
             // 
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(588, 420);
+            this.label11.Location = new System.Drawing.Point(735, 430);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(228, 40);
+            this.label11.Size = new System.Drawing.Size(287, 20);
             this.label11.TabIndex = 25;
             this.label11.Text = "Total Late/Early Scheduled Deliveries";
             // 
@@ -782,9 +853,9 @@ namespace DriverLogProject
             // 
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(939, 13);
+            this.label12.Location = new System.Drawing.Point(1174, 13);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(230, 20);
+            this.label12.Size = new System.Drawing.Size(289, 20);
             this.label12.TabIndex = 26;
             this.label12.Text = "Utilization of Pickup Trips";
             // 
@@ -792,9 +863,9 @@ namespace DriverLogProject
             // 
             this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(939, 59);
+            this.label13.Location = new System.Drawing.Point(1174, 59);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(230, 20);
+            this.label13.Size = new System.Drawing.Size(289, 20);
             this.label13.TabIndex = 27;
             this.label13.Text = "Utilization of Pickup Trips";
             // 
@@ -802,9 +873,9 @@ namespace DriverLogProject
             // 
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(939, 151);
+            this.label15.Location = new System.Drawing.Point(1174, 151);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(230, 20);
+            this.label15.Size = new System.Drawing.Size(289, 20);
             this.label15.TabIndex = 29;
             this.label15.Text = "Total Delivery Items";
             // 
@@ -812,9 +883,9 @@ namespace DriverLogProject
             // 
             this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(939, 105);
+            this.label14.Location = new System.Drawing.Point(1174, 105);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(230, 20);
+            this.label14.Size = new System.Drawing.Size(289, 20);
             this.label14.TabIndex = 28;
             this.label14.Text = "Total Picked Up Items";
             // 
@@ -822,9 +893,9 @@ namespace DriverLogProject
             // 
             this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(939, 187);
+            this.label16.Location = new System.Drawing.Point(1174, 187);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(230, 40);
+            this.label16.Size = new System.Drawing.Size(289, 40);
             this.label16.TabIndex = 30;
             this.label16.Text = "% of Scheduled Pickup Trips that are On-Time";
             // 
@@ -832,73 +903,73 @@ namespace DriverLogProject
             // 
             this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(939, 233);
+            this.label17.Location = new System.Drawing.Point(1174, 233);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(230, 40);
+            this.label17.Size = new System.Drawing.Size(289, 40);
             this.label17.TabIndex = 31;
             this.label17.Text = "% of Scheduled Delivery Trips that are On-Time";
             // 
             // dataBox13
             // 
             this.dataBox13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataBox13.Location = new System.Drawing.Point(822, 102);
+            this.dataBox13.Location = new System.Drawing.Point(1028, 102);
             this.dataBox13.Name = "dataBox13";
             this.dataBox13.ReadOnly = true;
-            this.dataBox13.Size = new System.Drawing.Size(111, 26);
+            this.dataBox13.Size = new System.Drawing.Size(140, 26);
             this.dataBox13.TabIndex = 32;
             // 
             // dataBox14
             // 
             this.dataBox14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataBox14.Location = new System.Drawing.Point(822, 148);
+            this.dataBox14.Location = new System.Drawing.Point(1028, 148);
             this.dataBox14.Name = "dataBox14";
             this.dataBox14.ReadOnly = true;
-            this.dataBox14.Size = new System.Drawing.Size(111, 26);
+            this.dataBox14.Size = new System.Drawing.Size(140, 26);
             this.dataBox14.TabIndex = 33;
             // 
             // dataBox15
             // 
             this.dataBox15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataBox15.Location = new System.Drawing.Point(822, 194);
+            this.dataBox15.Location = new System.Drawing.Point(1028, 194);
             this.dataBox15.Name = "dataBox15";
             this.dataBox15.ReadOnly = true;
-            this.dataBox15.Size = new System.Drawing.Size(111, 26);
+            this.dataBox15.Size = new System.Drawing.Size(140, 26);
             this.dataBox15.TabIndex = 34;
             // 
             // dataBox16
             // 
             this.dataBox16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataBox16.Location = new System.Drawing.Point(822, 240);
+            this.dataBox16.Location = new System.Drawing.Point(1028, 240);
             this.dataBox16.Name = "dataBox16";
             this.dataBox16.ReadOnly = true;
-            this.dataBox16.Size = new System.Drawing.Size(111, 26);
+            this.dataBox16.Size = new System.Drawing.Size(140, 26);
             this.dataBox16.TabIndex = 35;
             // 
             // dataBox17
             // 
             this.dataBox17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataBox17.Location = new System.Drawing.Point(822, 286);
+            this.dataBox17.Location = new System.Drawing.Point(1028, 286);
             this.dataBox17.Name = "dataBox17";
             this.dataBox17.ReadOnly = true;
-            this.dataBox17.Size = new System.Drawing.Size(111, 26);
+            this.dataBox17.Size = new System.Drawing.Size(140, 26);
             this.dataBox17.TabIndex = 36;
             // 
             // dataBox18
             // 
             this.dataBox18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataBox18.Location = new System.Drawing.Point(822, 332);
+            this.dataBox18.Location = new System.Drawing.Point(1028, 332);
             this.dataBox18.Name = "dataBox18";
             this.dataBox18.ReadOnly = true;
-            this.dataBox18.Size = new System.Drawing.Size(111, 26);
+            this.dataBox18.Size = new System.Drawing.Size(140, 26);
             this.dataBox18.TabIndex = 37;
             // 
             // label18
             // 
             this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(939, 289);
+            this.label18.Location = new System.Drawing.Point(1174, 289);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(230, 20);
+            this.label18.Size = new System.Drawing.Size(289, 20);
             this.label18.TabIndex = 38;
             this.label18.Text = "Total Scheduled Pickup Trips";
             // 
@@ -906,9 +977,9 @@ namespace DriverLogProject
             // 
             this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(939, 335);
+            this.label19.Location = new System.Drawing.Point(1174, 335);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(230, 20);
+            this.label19.Size = new System.Drawing.Size(289, 20);
             this.label19.TabIndex = 39;
             this.label19.Text = "Total Scheduled Delivery Trips";
             // 
@@ -916,7 +987,7 @@ namespace DriverLogProject
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1180, 535);
+            this.ClientSize = new System.Drawing.Size(1474, 535);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -930,6 +1001,7 @@ namespace DriverLogProject
             this.tabPage1TablePanel.ResumeLayout(false);
             this.tabPage1TablePanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.driverLogTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scheduleGrid)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -1012,6 +1084,12 @@ namespace DriverLogProject
         private System.Windows.Forms.TextBox dataBox18;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.DataGridView scheduleGrid;
+        private System.Windows.Forms.Button saveScheduleButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ScheduleID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ScheduleVehicleName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ScheduleBuilding;
+        private CalendarColumn Time;
     }
 }
 
