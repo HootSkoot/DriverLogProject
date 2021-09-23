@@ -195,7 +195,7 @@ namespace DriverLogProject
             List<object> list = new List<object>();
             
 
-            string query = $"SELECT * FROM '{name}' WHERE ";
+            string query = $"SELECT * FROM '{name}' WHERE (";
             int count = 1;
             foreach (string item in vehicleList)
             {
@@ -203,7 +203,7 @@ namespace DriverLogProject
                 count++;
                 list.Add(item);
             }
-            query += " and date(LoggingDate)>=date(@param" + count++ + ") and date(LoggingDate)<=date(@param" + count++ + ")";
+            query += ") and (date(LoggingDate)>=date(@param" + count++ + ") and date(LoggingDate)<=date(@param" + count++ + "))";
 
             list.Add(startDate);
             list.Add(endDate);
