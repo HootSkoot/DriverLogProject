@@ -29,14 +29,14 @@ namespace DriverLogProject
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.actionsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAddVehicle = new System.Windows.Forms.ToolStripMenuItem();
@@ -885,8 +885,8 @@ namespace DriverLogProject
             // calendarColumn1
             // 
             this.calendarColumn1.DataPropertyName = "ArriveTime";
-            dataGridViewCellStyle5.NullValue = null;
-            this.calendarColumn1.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle9.NullValue = null;
+            this.calendarColumn1.DefaultCellStyle = dataGridViewCellStyle9;
             this.calendarColumn1.HeaderText = "Arrival Time";
             this.calendarColumn1.MinimumWidth = 8;
             this.calendarColumn1.Name = "calendarColumn1";
@@ -913,8 +913,8 @@ namespace DriverLogProject
             // calendarColumn2
             // 
             this.calendarColumn2.DataPropertyName = "DepartTime";
-            dataGridViewCellStyle6.NullValue = null;
-            this.calendarColumn2.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle10.NullValue = null;
+            this.calendarColumn2.DefaultCellStyle = dataGridViewCellStyle10;
             this.calendarColumn2.HeaderText = "Departure Time";
             this.calendarColumn2.MinimumWidth = 8;
             this.calendarColumn2.Name = "calendarColumn2";
@@ -933,9 +933,9 @@ namespace DriverLogProject
             // dataGridViewTextBoxColumn7
             // 
             this.dataGridViewTextBoxColumn7.DataPropertyName = "PickupUtilization";
-            dataGridViewCellStyle7.Format = "N0";
-            dataGridViewCellStyle7.NullValue = null;
-            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle11.Format = "N0";
+            dataGridViewCellStyle11.NullValue = null;
+            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridViewTextBoxColumn7.HeaderText = "Pickup Utilization";
             this.dataGridViewTextBoxColumn7.MinimumWidth = 8;
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
@@ -952,8 +952,8 @@ namespace DriverLogProject
             // dataGridViewTextBoxColumn9
             // 
             this.dataGridViewTextBoxColumn9.DataPropertyName = "DeliveryUtilization";
-            dataGridViewCellStyle8.Format = "N0";
-            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle12.Format = "N0";
+            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle12;
             this.dataGridViewTextBoxColumn9.HeaderText = "Delivery Utilization";
             this.dataGridViewTextBoxColumn9.MinimumWidth = 8;
             this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
@@ -1034,8 +1034,8 @@ namespace DriverLogProject
             // ArriveTime
             // 
             this.ArriveTime.DataPropertyName = "ArriveTime";
-            dataGridViewCellStyle1.NullValue = null;
-            this.ArriveTime.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle13.NullValue = null;
+            this.ArriveTime.DefaultCellStyle = dataGridViewCellStyle13;
             this.ArriveTime.HeaderText = "Arrival Time";
             this.ArriveTime.MinimumWidth = 8;
             this.ArriveTime.Name = "ArriveTime";
@@ -1062,8 +1062,8 @@ namespace DriverLogProject
             // DepartTime
             // 
             this.DepartTime.DataPropertyName = "DepartTime";
-            dataGridViewCellStyle2.NullValue = null;
-            this.DepartTime.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle14.NullValue = null;
+            this.DepartTime.DefaultCellStyle = dataGridViewCellStyle14;
             this.DepartTime.HeaderText = "Departure Time";
             this.DepartTime.MinimumWidth = 8;
             this.DepartTime.Name = "DepartTime";
@@ -1082,9 +1082,9 @@ namespace DriverLogProject
             // PickupUtilization
             // 
             this.PickupUtilization.DataPropertyName = "PickupUtilization";
-            dataGridViewCellStyle3.Format = "N0";
-            dataGridViewCellStyle3.NullValue = null;
-            this.PickupUtilization.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle15.Format = "N0";
+            dataGridViewCellStyle15.NullValue = null;
+            this.PickupUtilization.DefaultCellStyle = dataGridViewCellStyle15;
             this.PickupUtilization.HeaderText = "Pickup Utilization";
             this.PickupUtilization.MinimumWidth = 8;
             this.PickupUtilization.Name = "PickupUtilization";
@@ -1101,8 +1101,8 @@ namespace DriverLogProject
             // DeliveryUtilization
             // 
             this.DeliveryUtilization.DataPropertyName = "DeliveryUtilization";
-            dataGridViewCellStyle4.Format = "N0";
-            this.DeliveryUtilization.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle16.Format = "N0";
+            this.DeliveryUtilization.DefaultCellStyle = dataGridViewCellStyle16;
             this.DeliveryUtilization.HeaderText = "Delivery Utilization";
             this.DeliveryUtilization.MinimumWidth = 8;
             this.DeliveryUtilization.Name = "DeliveryUtilization";
