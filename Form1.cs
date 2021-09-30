@@ -196,7 +196,7 @@ namespace DriverLogProject
 
                 foreach (DataGridViewRow row in driverLogTable.Rows)
                 {
-                    if (row.Cells["Building"].Value != null && row.Cells["Building"].Value.ToString().Length >= 1)
+                    if (row.Cells["Building"].Value != null && row.Cells["Building"].Value.ToString().Trim().Length >= 1)
                     {
                         driverTableItems = new List<object>();
 
@@ -257,7 +257,7 @@ namespace DriverLogProject
 
                 foreach (DataGridViewRow row in driverLogTable.Rows)
                 {
-                    if (row.Cells["Building"].Value != null && row.Cells["Building"].Value.ToString().Length > 1)
+                    if (row.Cells["Building"].Value != null && row.Cells["Building"].Value.ToString().Trim().Length >= 1)
                     {
                         driverTableItems = new List<object>();
 
