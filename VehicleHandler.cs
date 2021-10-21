@@ -36,19 +36,40 @@ namespace DriverLogProject
             helper.DBActionNoParams($"CREATE TABLE IF NOT EXISTS '{name}' (ScheduleID INTEGER NOT NULL UNIQUE PRIMARY KEY AUTOINCREMENT, ScheduleVehicleName TEXT, ScheduleBuilding TEXT, Time TEXT)");
         }
 
+        public void CreateVehicleNameTable()
+        {
+            helper = new SQLiteHelper(db);
+            helper.DBActionNoParams($"CREATE TABLE IF NOT EXISTS '{name}' (id INTEGER NOT NULL UNIQUE PRIMARY KEY AUTOINCREMENT, VehicleNameAsset TEXT NOT NULL UNIQUE)");
+        }
+
+        public void InsertVehicleNameAsset(string vehicleAssetName)
+        {
+            helper = new SQLiteHelper(db);
+            string insertCommand = $"INSERT INTO '{name}' (VehicleNameAsset) VALUES ";
+            List<object> list = new List<object>();
+            list.Add(vehicleAssetName);
+            int count = 1;
+            insertCommand += BuildParameterQueryString(list, ref count);
+            helper.DBActionWithParams(insertCommand, list);
+
+        }
+
+
         public void InsertOrUpdateScheduleData(Dictionary<string, List<object>> scheduleDict)
         {
             helper = new SQLiteHelper(db);
             string insertCommand = $"INSERT INTO '{name}' (ScheduleID, ScheduleVehicleName, ScheduleBuilding, Time) VALUES ";
             List<object> list = new List<object>();
-            int count = 1;
+            int count = 1;  //not neccessary but for consistency
             int p = 1;
+            //only one row for update
             if (scheduleDict.Count == 1)
             {
                 insertCommand += BuildParameterQueryString(scheduleDict["row1"], ref count);
                 insertCommand += " ON CONFLICT (ScheduleID) DO UPDATE SET Time=excluded.Time";
                 helper.DBActionWithParams(insertCommand, scheduleDict["row1"]);
             }
+            //multiple rows
             else if (scheduleDict.Count > 1)
             {
 
@@ -118,6 +139,15 @@ namespace DriverLogProject
             return helper.DBDataTableReturnWithParams(selectCommand, list);
             
             
+        }
+
+        public DataTable RetrieveVehicleAssetNames()
+        {
+            DataTable table = new DataTable();
+
+            helper = new SQLiteHelper(db);
+            string selectCommand = $"SELECT VehicleNameAsset FROM '{name}'";
+            return helper.DBDataTableReturnNoParams(selectCommand);
         }
 
         public DataTable RerieveScheduleTable(string vehicleName)

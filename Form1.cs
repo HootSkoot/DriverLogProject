@@ -25,6 +25,7 @@ namespace DriverLogProject
         private string db = "DriverDatabaseConsolidated.db";
         private string vehicleTable = "VehicleSchedule";
         private string scheduleTable = "ScheduleTable";
+        private string vehicleNameTable = "VehicleNameTable";
         private VehicleHandler handler;
         public DriverDatabaseForm()
         {
@@ -34,23 +35,34 @@ namespace DriverLogProject
 
         private void DriverDatabaseForm_Load(object sender, EventArgs e)
         {
+            VehicleHandler handler = new VehicleHandler(vehicleNameTable, db);
+            handler.CreateVehicleNameTable();
+            DataTable assetsRaw = handler.RetrieveVehicleAssetNames();
+
             bindinglist = new BindingList<string>();
             BindingSource bSource = new BindingSource();
             bSource.DataSource = bindinglist;
-            if (Properties.Settings.Default.VehicleList == null)
+
+            VehicleList.DataSource = bSource;
+            VehicleSumList.DataSource = bSource;
+
+
+            if (assetsRaw.Rows == null)
             {
                 bindinglist[0] = "";
             }
             else
             {
-                foreach (var item in Properties.Settings.Default.VehicleList)
+                foreach (DataRow row in assetsRaw.Rows)
                 {
-                    bindinglist.Add(item);
+                    bindinglist.Add((string)row["VehicleNameAsset"]);
                 }
             }
 
-            VehicleList.DataSource = bSource;
-            VehicleSumList.DataSource = bSource;
+            bSource.ResetBindings(true);
+
+            //VehicleList.DataSource = bSource;
+            //VehicleSumList.DataSource = bSource;
 
             DisableTabControls();
 
@@ -102,16 +114,23 @@ namespace DriverLogProject
 
         private void MenuAddVehicle_Click(object sender, EventArgs e)
         {
+            VehicleHandler handler3 = new VehicleHandler(vehicleNameTable, db);
+            handler3.CreateVehicleNameTable();
+
             String input = Interaction.InputBox("Enter an alphanumeric name, use underscores for spaces", "Vehicle Name", default);
 
             if (Regex.IsMatch(input, "^[a-zA-Z0-9_]*$"))
             {
-                if (!Properties.Settings.Default.VehicleList.Contains(input))
+                /*if (!Properties.Settings.Default.VehicleList.Contains(input))
                 {
                     Properties.Settings.Default.VehicleList.Add(input);
                     Properties.Settings.Default.Save();
                     bindinglist.Add(input);
-                }
+                }*/
+                handler3.InsertVehicleNameAsset(input);
+                bindinglist.Add(input);
+
+
                 
                 
             }
@@ -124,6 +143,7 @@ namespace DriverLogProject
             handler1.CreateVehicleTable();
             VehicleHandler handler2 = new VehicleHandler(scheduleTable, db);
             handler2.CreateScheduleTable();
+            
 
         }
 
