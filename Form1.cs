@@ -26,6 +26,7 @@ namespace DriverLogProject
         private string vehicleTable = "VehicleSchedule";
         private string scheduleTable = "ScheduleTable";
         private string vehicleNameTable = "VehicleNameTable";
+        private Dictionary<string, List<object>> tableRows;
         private VehicleHandler handler;
         public DriverDatabaseForm()
         {
@@ -207,44 +208,8 @@ namespace DriverLogProject
         private void logDataButton_Click(object sender, EventArgs e)
         {
             handler = new VehicleHandler(vehicleTable, db);
-            if (driverLogTable.Rows.Count > 0)
-            {
-                var driverTableItems = new List<object>();
-                Dictionary<string, List<object>> rowDict = new Dictionary<string, List<object>>();
-
-                int count = 1;
-
-                foreach (DataGridViewRow row in driverLogTable.Rows)
-                {
-                    if (row.Cells["Building"].Value != null && row.Cells["Building"].Value.ToString().Trim().Length >= 1)
-                    {
-                        driverTableItems = new List<object>();
-
-                        DateTime depart = (DateTime)row.Cells["DepartTime"].Value;
-                        DateTime arrive = (DateTime)row.Cells["ArriveTime"].Value;
-                        driverTableItems.Add(VehicleList.SelectedItem.ToString());
-                        driverTableItems.Add(row.Cells["Building"].Value);
-                        driverTableItems.Add(row.Cells["OnDemand"].Value);
-                        driverTableItems.Add(row.Cells["PickDeliverBoth"].Value);
-                        driverTableItems.Add(row.Cells["OnTime"].Value ?? 0);
-                        driverTableItems.Add((DateTime)row.Cells["ArriveTime"].Value);
-                        driverTableItems.Add(arrive.ToShortDateString());
-                        driverTableItems.Add(arrive.ToShortTimeString());
-                        driverTableItems.Add((DateTime)row.Cells["DepartTime"].Value);
-                        driverTableItems.Add(row.Cells["PiecesPicked"].Value);
-                        driverTableItems.Add(row.Cells["PickupUtilization"].Value);
-                        driverTableItems.Add(row.Cells["PiecesDelivered"].Value);
-                        driverTableItems.Add(row.Cells["DeliveryUtilization"].Value);
-                        driverTableItems.Add(dateTimePicker1.Value.ToString("yyyy-MM-dd"));
-
-                        rowDict.Add("row" + count, driverTableItems);
-                        count++;
-                    }
-                    
-                }
-
-                handler.InsertDriverData(rowDict,null);
-            }
+            
+            handler.InsertDriverData(createTableRowCollection(), null);
             
         }
 
@@ -628,6 +593,71 @@ namespace DriverLogProject
 
                 handler.InsertOrUpdateScheduleData(rowDict);
             }
+        }
+
+        private Dictionary<string,List<object>> createTableRowCollection()
+        {
+            Dictionary<string, List<object>> tempRows = new Dictionary<string, List<object>>();
+
+            if (driverLogTable.Rows.Count > 0)
+            {
+                var driverTableItems = new List<object>();
+
+                int count = 1;
+
+                foreach (DataGridViewRow row in driverLogTable.Rows)
+                {
+                    if (row.Cells["Building"].Value != null && row.Cells["Building"].Value.ToString().Trim().Length >= 1)
+                    {
+                        driverTableItems = new List<object>();
+
+                        DateTime depart = (DateTime)row.Cells["DepartTime"].Value;
+                        DateTime arrive = (DateTime)row.Cells["ArriveTime"].Value;
+                        driverTableItems.Add(VehicleList.SelectedItem.ToString());
+                        driverTableItems.Add(row.Cells["Building"].Value);
+                        driverTableItems.Add(row.Cells["OnDemand"].Value);
+                        driverTableItems.Add(row.Cells["PickDeliverBoth"].Value);
+                        driverTableItems.Add(row.Cells["OnTime"].Value ?? 0);
+                        driverTableItems.Add((DateTime)row.Cells["ArriveTime"].Value);
+                        driverTableItems.Add(arrive.ToShortDateString());
+                        driverTableItems.Add(arrive.ToShortTimeString());
+                        driverTableItems.Add((DateTime)row.Cells["DepartTime"].Value);
+                        driverTableItems.Add(row.Cells["PiecesPicked"].Value);
+                        driverTableItems.Add(row.Cells["PickupUtilization"].Value);
+                        driverTableItems.Add(row.Cells["PiecesDelivered"].Value);
+                        driverTableItems.Add(row.Cells["DeliveryUtilization"].Value);
+                        driverTableItems.Add(dateTimePicker1.Value.ToString("yyyy-MM-dd"));
+
+                        tempRows.Add("row" + count, driverTableItems);
+                        count++;
+                    }
+
+                }
+
+                
+            }
+
+            return tempRows;
+        }
+
+        private void CopyButton_Click(object sender, EventArgs e)
+        {
+            tableRows = createTableRowCollection();
+        }
+
+        private void PasteButton_Click(object sender, EventArgs e)
+        {
+            if (tableRows != null && tableRows.Count > 0)
+            {
+                ClearVehicleTable();
+
+                foreach (List<object> item in tableRows.Values)
+                {
+                    driverLogTable.Rows.Add(0, item[0], item[1].ToString(), item[2], item[3], item[4], DateTime.Parse(item[5].ToString()), item[6], item[7], DateTime.Parse(item[8].ToString()), item[9], item[10], item[11], item[12], item[13]);
+                }
+                tableRows = null;
+            }
+            
         }
 
 

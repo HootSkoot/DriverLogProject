@@ -29,14 +29,14 @@ namespace DriverLogProject
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.actionsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAddVehicle = new System.Windows.Forms.ToolStripMenuItem();
@@ -132,6 +132,8 @@ namespace DriverLogProject
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.calendarColumn3 = new DriverLogProject.DriverDatabaseForm.CalendarColumn();
+            this.CopyButton = new System.Windows.Forms.Button();
+            this.PasteButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -150,7 +152,7 @@ namespace DriverLogProject
             this.actionsMenu});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(2211, 54);
+            this.menuStrip1.Size = new System.Drawing.Size(1712, 33);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -174,10 +176,10 @@ namespace DriverLogProject
             this.tabControl.Controls.Add(this.tabPage1);
             this.tabControl.Controls.Add(this.tabPage2);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl.Location = new System.Drawing.Point(0, 81);
+            this.tabControl.Location = new System.Drawing.Point(0, 33);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(2211, 722);
+            this.tabControl.Size = new System.Drawing.Size(1712, 700);
             this.tabControl.TabIndex = 0;
             // 
             // tabPage1
@@ -185,7 +187,7 @@ namespace DriverLogProject
             this.tabPage1.Controls.Add(this.tabPage1TablePanel);
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1466, 469);
+            this.tabPage1.Size = new System.Drawing.Size(1704, 667);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Vehicle Handler";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -199,7 +201,7 @@ namespace DriverLogProject
             this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28572F));
             this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28572F));
             this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28572F));
-            this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 8F));
             this.tabPage1TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28572F));
             this.tabPage1TablePanel.Controls.Add(this.VehicleList, 0, 0);
             this.tabPage1TablePanel.Controls.Add(this.activateVehicle, 1, 0);
@@ -211,6 +213,8 @@ namespace DriverLogProject
             this.tabPage1TablePanel.Controls.Add(this.updateButton, 1, 3);
             this.tabPage1TablePanel.Controls.Add(this.scheduleGrid, 7, 2);
             this.tabPage1TablePanel.Controls.Add(this.saveScheduleButton, 7, 3);
+            this.tabPage1TablePanel.Controls.Add(this.CopyButton, 4, 3);
+            this.tabPage1TablePanel.Controls.Add(this.PasteButton, 5, 3);
             this.tabPage1TablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabPage1TablePanel.Location = new System.Drawing.Point(0, 0);
             this.tabPage1TablePanel.Name = "tabPage1TablePanel";
@@ -219,7 +223,7 @@ namespace DriverLogProject
             this.tabPage1TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 11F));
             this.tabPage1TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tabPage1TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tabPage1TablePanel.Size = new System.Drawing.Size(1466, 469);
+            this.tabPage1TablePanel.Size = new System.Drawing.Size(1704, 667);
             this.tabPage1TablePanel.TabIndex = 3;
             // 
             // VehicleList
@@ -229,16 +233,16 @@ namespace DriverLogProject
             this.VehicleList.FormattingEnabled = true;
             this.VehicleList.Location = new System.Drawing.Point(3, 3);
             this.VehicleList.Name = "VehicleList";
-            this.VehicleList.Size = new System.Drawing.Size(201, 28);
+            this.VehicleList.Size = new System.Drawing.Size(236, 28);
             this.VehicleList.TabIndex = 1;
             this.VehicleList.SelectedIndexChanged += new System.EventHandler(this.VehicleList_SelectedIndexChanged);
             // 
             // activateVehicle
             // 
             this.activateVehicle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.activateVehicle.Location = new System.Drawing.Point(210, 3);
+            this.activateVehicle.Location = new System.Drawing.Point(245, 3);
             this.activateVehicle.Name = "activateVehicle";
-            this.activateVehicle.Size = new System.Drawing.Size(202, 29);
+            this.activateVehicle.Size = new System.Drawing.Size(236, 29);
             this.activateVehicle.TabIndex = 2;
             this.activateVehicle.Text = "Set Active Vechicle";
             this.activateVehicle.UseVisualStyleBackColor = true;
@@ -273,7 +277,7 @@ namespace DriverLogProject
             this.driverLogTable.RowHeadersVisible = false;
             this.driverLogTable.RowHeadersWidth = 62;
             this.driverLogTable.RowTemplate.Height = 28;
-            this.driverLogTable.Size = new System.Drawing.Size(1241, 382);
+            this.driverLogTable.Size = new System.Drawing.Size(1446, 580);
             this.driverLogTable.TabIndex = 3;
             this.driverLogTable.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.driverLogTable_DefaultValuesNeeded);
             // 
@@ -347,8 +351,8 @@ namespace DriverLogProject
             // ArriveTime
             // 
             this.ArriveTime.DataPropertyName = "ArriveTime";
-            dataGridViewCellStyle41.NullValue = null;
-            this.ArriveTime.DefaultCellStyle = dataGridViewCellStyle41;
+            dataGridViewCellStyle25.NullValue = null;
+            this.ArriveTime.DefaultCellStyle = dataGridViewCellStyle25;
             this.ArriveTime.HeaderText = "Arrival Time";
             this.ArriveTime.MinimumWidth = 8;
             this.ArriveTime.Name = "ArriveTime";
@@ -375,8 +379,8 @@ namespace DriverLogProject
             // DepartTime
             // 
             this.DepartTime.DataPropertyName = "DepartTime";
-            dataGridViewCellStyle42.NullValue = null;
-            this.DepartTime.DefaultCellStyle = dataGridViewCellStyle42;
+            dataGridViewCellStyle26.NullValue = null;
+            this.DepartTime.DefaultCellStyle = dataGridViewCellStyle26;
             this.DepartTime.HeaderText = "Departure Time";
             this.DepartTime.MinimumWidth = 8;
             this.DepartTime.Name = "DepartTime";
@@ -395,9 +399,9 @@ namespace DriverLogProject
             // PickupUtilization
             // 
             this.PickupUtilization.DataPropertyName = "PickupUtilization";
-            dataGridViewCellStyle43.Format = "N0";
-            dataGridViewCellStyle43.NullValue = null;
-            this.PickupUtilization.DefaultCellStyle = dataGridViewCellStyle43;
+            dataGridViewCellStyle27.Format = "N0";
+            dataGridViewCellStyle27.NullValue = null;
+            this.PickupUtilization.DefaultCellStyle = dataGridViewCellStyle27;
             this.PickupUtilization.HeaderText = "Pickup Utilization";
             this.PickupUtilization.MinimumWidth = 8;
             this.PickupUtilization.Name = "PickupUtilization";
@@ -414,8 +418,8 @@ namespace DriverLogProject
             // DeliveryUtilization
             // 
             this.DeliveryUtilization.DataPropertyName = "DeliveryUtilization";
-            dataGridViewCellStyle44.Format = "N0";
-            this.DeliveryUtilization.DefaultCellStyle = dataGridViewCellStyle44;
+            dataGridViewCellStyle28.Format = "N0";
+            this.DeliveryUtilization.DefaultCellStyle = dataGridViewCellStyle28;
             this.DeliveryUtilization.HeaderText = "Delivery Utilization";
             this.DeliveryUtilization.MinimumWidth = 8;
             this.DeliveryUtilization.Name = "DeliveryUtilization";
@@ -441,17 +445,17 @@ namespace DriverLogProject
             // dateTimePicker1
             // 
             this.dateTimePicker1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dateTimePicker1.Location = new System.Drawing.Point(626, 3);
+            this.dateTimePicker1.Location = new System.Drawing.Point(729, 3);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(202, 26);
+            this.dateTimePicker1.Size = new System.Drawing.Size(236, 26);
             this.dateTimePicker1.TabIndex = 4;
             // 
             // selectDateButton
             // 
             this.selectDateButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.selectDateButton.Location = new System.Drawing.Point(834, 3);
+            this.selectDateButton.Location = new System.Drawing.Point(971, 3);
             this.selectDateButton.Name = "selectDateButton";
-            this.selectDateButton.Size = new System.Drawing.Size(202, 29);
+            this.selectDateButton.Size = new System.Drawing.Size(236, 29);
             this.selectDateButton.TabIndex = 5;
             this.selectDateButton.Text = "Select Date";
             this.selectDateButton.UseVisualStyleBackColor = true;
@@ -460,9 +464,9 @@ namespace DriverLogProject
             // logDataButton
             // 
             this.logDataButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.logDataButton.Location = new System.Drawing.Point(3, 437);
+            this.logDataButton.Location = new System.Drawing.Point(3, 635);
             this.logDataButton.Name = "logDataButton";
-            this.logDataButton.Size = new System.Drawing.Size(201, 29);
+            this.logDataButton.Size = new System.Drawing.Size(236, 29);
             this.logDataButton.TabIndex = 6;
             this.logDataButton.Text = "Log Data";
             this.logDataButton.UseVisualStyleBackColor = true;
@@ -471,20 +475,20 @@ namespace DriverLogProject
             // label1
             // 
             this.label1.AutoSize = true;
-            this.tabPage1TablePanel.SetColumnSpan(this.label1, 3);
+            this.tabPage1TablePanel.SetColumnSpan(this.label1, 2);
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(418, 434);
+            this.label1.Location = new System.Drawing.Point(487, 632);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(618, 35);
+            this.label1.Size = new System.Drawing.Size(478, 35);
             this.label1.TabIndex = 7;
             this.label1.Text = "Square: Not Relevant, Empty: Not On Time, Check: On Time";
             // 
             // updateButton
             // 
             this.updateButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.updateButton.Location = new System.Drawing.Point(210, 437);
+            this.updateButton.Location = new System.Drawing.Point(245, 635);
             this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(202, 29);
+            this.updateButton.Size = new System.Drawing.Size(236, 29);
             this.updateButton.TabIndex = 8;
             this.updateButton.Text = "Update Existing";
             this.updateButton.UseVisualStyleBackColor = true;
@@ -501,12 +505,12 @@ namespace DriverLogProject
             this.Time});
             this.scheduleGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.scheduleGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.scheduleGrid.Location = new System.Drawing.Point(1260, 49);
+            this.scheduleGrid.Location = new System.Drawing.Point(1463, 49);
             this.scheduleGrid.Name = "scheduleGrid";
             this.scheduleGrid.RowHeadersVisible = false;
             this.scheduleGrid.RowHeadersWidth = 62;
             this.scheduleGrid.RowTemplate.Height = 28;
-            this.scheduleGrid.Size = new System.Drawing.Size(203, 382);
+            this.scheduleGrid.Size = new System.Drawing.Size(238, 580);
             this.scheduleGrid.TabIndex = 9;
             // 
             // ScheduleID
@@ -542,9 +546,9 @@ namespace DriverLogProject
             // saveScheduleButton
             // 
             this.saveScheduleButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.saveScheduleButton.Location = new System.Drawing.Point(1260, 437);
+            this.saveScheduleButton.Location = new System.Drawing.Point(1463, 635);
             this.saveScheduleButton.Name = "saveScheduleButton";
-            this.saveScheduleButton.Size = new System.Drawing.Size(203, 29);
+            this.saveScheduleButton.Size = new System.Drawing.Size(238, 29);
             this.saveScheduleButton.TabIndex = 10;
             this.saveScheduleButton.Text = "Save Schedule";
             this.saveScheduleButton.UseVisualStyleBackColor = true;
@@ -1034,8 +1038,8 @@ namespace DriverLogProject
             // calendarColumn1
             // 
             this.calendarColumn1.DataPropertyName = "ArriveTime";
-            dataGridViewCellStyle45.NullValue = null;
-            this.calendarColumn1.DefaultCellStyle = dataGridViewCellStyle45;
+            dataGridViewCellStyle29.NullValue = null;
+            this.calendarColumn1.DefaultCellStyle = dataGridViewCellStyle29;
             this.calendarColumn1.HeaderText = "Arrival Time";
             this.calendarColumn1.MinimumWidth = 8;
             this.calendarColumn1.Name = "calendarColumn1";
@@ -1062,8 +1066,8 @@ namespace DriverLogProject
             // calendarColumn2
             // 
             this.calendarColumn2.DataPropertyName = "DepartTime";
-            dataGridViewCellStyle46.NullValue = null;
-            this.calendarColumn2.DefaultCellStyle = dataGridViewCellStyle46;
+            dataGridViewCellStyle30.NullValue = null;
+            this.calendarColumn2.DefaultCellStyle = dataGridViewCellStyle30;
             this.calendarColumn2.HeaderText = "Departure Time";
             this.calendarColumn2.MinimumWidth = 8;
             this.calendarColumn2.Name = "calendarColumn2";
@@ -1082,9 +1086,9 @@ namespace DriverLogProject
             // dataGridViewTextBoxColumn7
             // 
             this.dataGridViewTextBoxColumn7.DataPropertyName = "PickupUtilization";
-            dataGridViewCellStyle47.Format = "N0";
-            dataGridViewCellStyle47.NullValue = null;
-            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle47;
+            dataGridViewCellStyle31.Format = "N0";
+            dataGridViewCellStyle31.NullValue = null;
+            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle31;
             this.dataGridViewTextBoxColumn7.HeaderText = "Pickup Utilization";
             this.dataGridViewTextBoxColumn7.MinimumWidth = 8;
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
@@ -1101,8 +1105,8 @@ namespace DriverLogProject
             // dataGridViewTextBoxColumn9
             // 
             this.dataGridViewTextBoxColumn9.DataPropertyName = "DeliveryUtilization";
-            dataGridViewCellStyle48.Format = "N0";
-            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle48;
+            dataGridViewCellStyle32.Format = "N0";
+            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle32;
             this.dataGridViewTextBoxColumn9.HeaderText = "Delivery Utilization";
             this.dataGridViewTextBoxColumn9.MinimumWidth = 8;
             this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
@@ -1155,11 +1159,33 @@ namespace DriverLogProject
             this.calendarColumn3.Name = "calendarColumn3";
             this.calendarColumn3.Width = 80;
             // 
+            // CopyButton
+            // 
+            this.CopyButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CopyButton.Location = new System.Drawing.Point(971, 635);
+            this.CopyButton.Name = "CopyButton";
+            this.CopyButton.Size = new System.Drawing.Size(236, 29);
+            this.CopyButton.TabIndex = 11;
+            this.CopyButton.Text = "Copy Data";
+            this.CopyButton.UseVisualStyleBackColor = true;
+            this.CopyButton.Click += new System.EventHandler(this.CopyButton_Click);
+            // 
+            // PasteButton
+            // 
+            this.PasteButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PasteButton.Location = new System.Drawing.Point(1213, 635);
+            this.PasteButton.Name = "PasteButton";
+            this.PasteButton.Size = new System.Drawing.Size(236, 29);
+            this.PasteButton.TabIndex = 12;
+            this.PasteButton.Text = "Paste Data";
+            this.PasteButton.UseVisualStyleBackColor = true;
+            this.PasteButton.Click += new System.EventHandler(this.PasteButton_Click);
+            // 
             // DriverDatabaseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1474, 535);
+            this.ClientSize = new System.Drawing.Size(1712, 733);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -1279,6 +1305,8 @@ namespace DriverLogProject
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
         private CalendarColumn calendarColumn3;
+        private System.Windows.Forms.Button CopyButton;
+        private System.Windows.Forms.Button PasteButton;
     }
 }
 
