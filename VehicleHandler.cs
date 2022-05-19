@@ -155,7 +155,7 @@ namespace DriverLogProject
             DataTable table = new DataTable();
 
             helper = new SQLiteHelper(db);
-            string selectCommand = $"SELECT ScheduleID, ScheduleVehicleName, ScheduleBuilding, Time FROM '{name}' WHERE ScheduleVehicleName=@param1";
+            string selectCommand = $"SELECT ScheduleID, ScheduleVehicleName, ScheduleBuilding, Time FROM '{name}' WHERE ScheduleVehicleName=@param1 ORDER BY Time ASC";
             List<object> list = new List<object>();
             list.Add(vehicleName);
             return helper.DBDataTableReturnWithParams(selectCommand, list);
