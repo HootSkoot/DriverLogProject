@@ -78,6 +78,7 @@ namespace DriverLogProject
 
             //VehicleList.Items.AddRange(Properties.Settings.Default.VehicleList.Cast<string>().ToArray());
         }
+
         /*
         private SQLiteConnection GetConnection() => new SQLiteConnection("Data source=" + db);
 
@@ -230,6 +231,7 @@ namespace DriverLogProject
 
         }
 
+        //for adding only new lines to DB
         private void updateButton_Click(object sender, EventArgs e)
         {
             handler = new VehicleHandler(vehicleTable, db);

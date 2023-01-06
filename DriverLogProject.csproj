@@ -17,7 +17,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\mnishimurax098966\OneDrive - Applied Materials\Projects\DriverLogVersion1\</PublishUrl>
+    <PublishUrl>C:\Users\mnishimurax098966\OneDrive - Applied Materials\Documents\Testing Pucblish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -30,7 +30,6 @@
     <UpdateUrl>http://localhost/DriverLogProject/</UpdateUrl>
     <ProductName>DriverLog</ProductName>
     <PublisherName>Michael Nishimura</PublisherName>
-    <AutorunEnabled>true</AutorunEnabled>
     <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>1.0.0.6</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
@@ -66,7 +65,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
